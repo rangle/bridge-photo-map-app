@@ -1,9 +1,6 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
-
+import { Route } from 'react-router';
+import App from '../containers/app.js';
 export default (
-  <Route path="/" component={ App }>
-    <IndexRoute component={ CounterPage }/>
-    <Route path="about" component={ AboutPage }/>
-  </Route>
+  <Route path="/" component={ App }/>
 );
