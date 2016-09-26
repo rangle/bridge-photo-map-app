@@ -5,7 +5,6 @@ import thunk from 'redux-thunk';
 import promiseMiddleware from '../middleware/promise-middleware';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
-import logger from './logger';
 import rootReducer from '../reducers';
 
 function configureStore(initialState) {
@@ -26,7 +25,7 @@ function _getMiddleware() {
   ];
 
   if (__DEV__) {
-    middleware = [...middleware, logger];
+    middleware = [...middleware];
   }
 
   return applyMiddleware(...middleware);
