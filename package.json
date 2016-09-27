@@ -10,6 +10,7 @@
     "prebuild": "npm run clean",
     "build": "cross-env NODE_ENV=production webpack -p",
     "clean": "rimraf dist/ coverage/",
+    "cover": "istanbul report --include=**/chrome/coverage-final.json text text-summary",
     "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info",
     "lint": "npm run lint-js && npm run lint-css",
     "lint-css": "stylelint './src/**/*.css'",
@@ -18,7 +19,7 @@
     "start": "cross-env NODE_ENV=production http-server ./dist",
     "pretest": "npm run clean coverage/ && npm run lint",
     "test": "karma start --singleRun true",
-    "posttest": "istanbul check-coverage --statement 75 --branch 60 --function 50",
+    "posttest": "npm run cover",
     "test:watch": "karma start --singleRun false"
   },
   "devDependencies": {
