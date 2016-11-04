@@ -20,10 +20,13 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash].js',
+    filename: process.env.NODE_ENV === 'production' ?
+      '[name].[chunkhash].js' : '[name].js',
     publicPath: '/',
-    sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js',
+    sourceMapFilename: process.env.NODE_ENV === 'production' ?
+      '[name].[chunkhash].js.map' : '[name].js.map',
+    chunkFilename: process.env.NODE_ENV === 'production' ?
+      '[name].chunk.[chunkhash].js' : '[name].js',
   },
 
   devtool: !devmode ? 'source-map' : 'inline-source-map',
