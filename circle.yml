@@ -20,4 +20,4 @@ deployment:
   staging:
     branch: master
     heroku:
-      appname: testapp
+      appname: testappbridge
