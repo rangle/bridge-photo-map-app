@@ -3,6 +3,11 @@ const plugins = require('./webpack/plugins');
 const postcss = require('./webpack/postcss');
 const loaders = require('./webpack/loaders');
 
+
+// devmode will be set to either true or false, it will be true if the NODE_ENV value, which can be set by
+// servers, is not equal to 'production' ie, if not in production mode, you're in dev mode
+// devmode's value is usually in allowing you to more easily debug and navigate your code while running
+// usually in production mode, developers make it so your code is very minified and console logs are minimal if not entirely removed
 const devmode = process.env.NODE_ENV !== 'production';
 
 function getEntrySources(sources) {
