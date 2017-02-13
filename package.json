@@ -23,7 +23,7 @@
     "test:watch": "karma start --singleRun false",
     "deploy:heroku": "git subtree push --prefix dist heroku master"
   },
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^6.3.3",
     "babel": "^6.5.2",
     "babel-cli": "^6.8.0",
@@ -99,10 +99,7 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.12.0",
     "webpack-split-by-path": "0.0.10",
-    "whatwg-fetch": "^1.0.0"
-  },
-  "dependencies": {
-    "cross-env": "^2.0.0",
+    "whatwg-fetch": "^1.0.0",
     "cross-spawn": "^5.0.1",
     "express": "^4.13.3",
     "helmet": "^2.0.0",

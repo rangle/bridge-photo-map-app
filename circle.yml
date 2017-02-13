@@ -16,3 +16,8 @@ test:
 general:
   artifacts:
     - "./coverage"
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: testapp
