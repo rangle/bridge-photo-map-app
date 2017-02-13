@@ -4,11 +4,6 @@
 
 > Rangle.io official React + Redux starter
 
-## Getting Started
-
-Use our [starter script](https://www.npmjs.com/package/rangle-starter), with
-`react-starter` as the `techStack` argument.
-
 ## npm scripts
 
 ### Dev
