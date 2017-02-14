@@ -20,4 +20,4 @@ deployment:
   staging:
     branch: master
     heroku:
-      appname: testappbridge
+      appname: bridge-photo-map-app
