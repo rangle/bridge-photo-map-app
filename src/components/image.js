@@ -1,21 +1,19 @@
 import React from 'react';
 
-const Image = (props) => (
-    <div className="row">
-    {props.photos.map((image, index) => {
+const Image = ({ photos }) => (
+    <div>
+    {photos.map((image, index) => {
       return (
-        <div key={index} className="col s4">
-          <div className="card">
-            <div className="card-image">
-              <img className="responsive-img" src={image.image_url}/>
-              <span className="card-title">{image.name}</span>
+        <div key={index}>
+            <div>
+              <img src={image.image_url}/>
+              <span>{image.name}</span>
             </div>
-            <div className="card-content">
+            <div>
               <p>Camera: {image.camera}</p>
               <p>Aperture: {image.aperture}</p>
               <p>Focal Length: {image.focal_length}</p>
             </div>
-          </div>
         </div>
       );
     })}

@@ -1,18 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPhotos } from '../actions/index.js';
-import Image from '../components/image.js';
+import { getPhotos } from '../actions/index';
+import Image from '../components/image';
 
-const mapStateToProps = state => ({
-  photos: state.photos.list,
-});
-
-const mapDispatchToProps = {
-  getPhotos,
-};
-
-class App extends Component {
+class PhotoGallery extends Component {
   componentDidMount() {
     this.props.getPhotos();
   }
@@ -26,10 +18,17 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  getPhotos: React.PropTypes.func,
-  photos: React.PropTypes.array,
+PhotoGallery.propTypes = {
+  getPhotos: React.PropTypes.func.isRequired,
+  photos: React.PropTypes.array.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-// export default App;
+const mapStateToProps = state => ({
+  photos: state.photos.list,
+});
+
+const mapDispatchToProps = {
+  getPhotos,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoGallery);
