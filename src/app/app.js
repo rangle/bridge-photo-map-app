@@ -10,8 +10,8 @@ class PhotoGallery extends Component {
   }
   render() {
     return (
-          <div className="container">
-            <h3 className="center-align">Photo Map App</h3>
+          <div>
+            <h3>Photo Map App</h3>
             <Image photos={this.props.photos}/>
           </div>
     );
