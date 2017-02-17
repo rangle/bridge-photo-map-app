@@ -9,7 +9,6 @@ export function getPhotos() {
   return function(dispatch) {
     get('/photos')
     .then(response => {
-      console.log(response.photos);
       dispatch({
         type: ACTION_TYPES.getPhotos,
         payload: {
