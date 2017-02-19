@@ -6,7 +6,7 @@ export const ACTION_TYPES = {
 
 // Action
 export function getPhotos() {
-  return function(dispatch) {
+  return dispatch => {
     get('/photos')
     .then(response => {
       dispatch({
