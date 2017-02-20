@@ -14,7 +14,7 @@ class App extends Component {
       <main>
         <h3>Photo Map App</h3>
         <PhotoGallery photos={this.props.photos} />
-        <PhotoMap />
+        <PhotoMap photos={this.props.photos} />
       </main>
     );
   }
