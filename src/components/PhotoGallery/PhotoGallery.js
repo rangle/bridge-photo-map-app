@@ -1,34 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 
-import { getPhotos } from '../../actions/index';
 import Images from '../Images/Images';
 
-class PhotoGallery extends Component {
-  componentDidMount() {
-    this.props.getPhotos();
-  }
-  render() {
-    return (
-          <div>
-            <h3>Photo Map App</h3>
-            <Images photos={this.props.photos}/>
-          </div>
-    );
-  }
+export default function PhotoGallery({
+  photos,
+}) {
+  return (
+    <div>
+      <Images photos={photos}/>
+    </div>
+  );
 }
 
 PhotoGallery.propTypes = {
-  getPhotos: React.PropTypes.func.isRequired,
-  photos: React.PropTypes.array.isRequired,
+  photos: PropTypes.array.isRequired,
 };
-
-const mapStateToProps = state => ({
-  photos: state.photos.list,
-});
-
-const mapDispatchToProps = {
-  getPhotos,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhotoGallery);
