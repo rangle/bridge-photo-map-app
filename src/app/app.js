@@ -9,9 +9,12 @@ class PhotoGallery extends Component {
     this.props.getPhotos();
   }
   render() {
+    const handleInput = (e) => console.log(e.target.value);
     return (
           <div>
             <h3>Photo Map App</h3>
+            <input onChange={handleInput} type="text"/>
+            <button type="button">Search</button>
             <Image photos={this.props.photos}/>
           </div>
     );
