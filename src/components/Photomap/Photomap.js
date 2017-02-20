@@ -14,6 +14,8 @@ class PhotoMap extends Component {
     };
     this.state = this.initState;
     this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
   }
 
   onMarkerClick(props, marker) {
@@ -38,8 +40,8 @@ class PhotoMap extends Component {
     return (
       <Map
         google={this.props.google}
-        style={{width: '100%', height: '50%', position: 'relative'}}
-        zoom={3}>
+        zoom={3}
+        onClick={this.onMapClicked}>
         { this.props.photos.map( (photo, index) => <Marker
           key={index}
           name={photo.name || 'N/A'}
@@ -48,7 +50,8 @@ class PhotoMap extends Component {
         }
         <InfoWindow
           marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}>
+          visible={this.state.showingInfoWindow}
+          onClose={this.onInfoWindowClose}>
             <p>{this.state.selectedPlace.name}</p>
         </InfoWindow>
       </Map>
