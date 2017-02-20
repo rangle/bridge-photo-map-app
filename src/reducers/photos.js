@@ -18,6 +18,8 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{showingInfoWindow: payload.showingInfoWindow}};
   case ACTION_TYPES.setActiveMarker:
     return {...state, ...{activeMarker: payload.activeMarker}};
+  case ACTION_TYPES.searchPhotos:
+    return {...state, ...{list: payload.search}};
   default:
     return state;
   }
