@@ -52,7 +52,7 @@ export function setActiveMarker(activeMarker) {
 
 export function searchPhotos() {
   return dispatch => {
-    get('photos/search', {term: 'bike', image_size: 440})
+    get('photos/search', {term: 'pugs', image_size: 440})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.searchPhotos,
