@@ -16,7 +16,6 @@ class PhotoGallery extends Component {
             <h3>Photo Map App</h3>
             <input onChange={handleInput} type="text"/>
             <button onClick={handleSearch} type="button">Search</button>
-            <h4>{/*For search term.*/}</h4>
             <Image photos={this.props.photos}/>
           </div>
     );
