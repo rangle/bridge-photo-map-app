@@ -5,12 +5,13 @@ export const ACTION_TYPES = {
   setSelectedPhotoID: 'SET_SELECTED_PHOTO_ID',
   showInfoWindow: 'SHOW_INFO_WINDOW',
   setActiveMarker: 'SET_ACTIVE_MARKER',
+  searchPhotos: 'SEARCH_PHOTOS',
 };
 
 // Actions
 export function getPhotos() {
   return dispatch => {
-    get('/photos')
+    get('/photos', {feature: 'popular', image_size: 440})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -48,3 +49,17 @@ export function setActiveMarker(activeMarker) {
     },
   };
 }
+
+export function searchPhotos() {
+  return dispatch => {
+    get('photos/search', {term: 'bike', image_size: 440})
+    .then(response => {
+      dispatch({
+        type: ACTION_TYPES.searchPhotos,
+        payload: {
+          search: response.photos,
+        },
+      });
+    });
+  }
+};
