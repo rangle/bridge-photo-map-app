@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Image = ({ photos }) => (
+const Images = ({ photos }) => (
     <div>
     {photos.map((image, index) => {
       return (
@@ -21,8 +21,8 @@ const Image = ({ photos }) => (
 );
 
 
-Image.propTypes = {
+Images.propTypes = {
   photos: React.PropTypes.array,
 };
 
-export default Image;
+export default Images;
