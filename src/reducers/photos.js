@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   selectedPhotoID: NaN,
   showingInfoWindow: false,
   activeMarker: {},
+  search: '',
 };
 
 // Reducer
