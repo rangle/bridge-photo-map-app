@@ -58,6 +58,7 @@ export function handleInput(keyword) {
       type: ACTION_TYPES.handleInput,
       payload: {
         keyword: keyword,
+        status: false, // Prevents state keyword from showing on type after first search.
       },
     });
   };

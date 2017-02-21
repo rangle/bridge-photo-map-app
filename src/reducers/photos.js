@@ -23,7 +23,7 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
   case ACTION_TYPES.setActiveMarker:
     return {...state, ...{activeMarker: payload.activeMarker}};
   case ACTION_TYPES.handleInput:
-    return {...state, ...{search: payload.keyword}};
+    return {...state, ...{search: payload.keyword, status: payload.status}};
   case ACTION_TYPES.searchPhotos:
     return {...state, ...{list: payload.search, status: payload.status}};
   default:
