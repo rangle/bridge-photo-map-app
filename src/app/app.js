@@ -10,7 +10,7 @@ class PhotoGallery extends Component {
   }
   render() {
     const handleKeyword = (e) => this.props.handleInput(e.target.value);
-    const handleSearch = () => this.props.searchPhotos({term: this.props.searchKeyword, image_size: 440});
+    const handleSearch = () => this.props.searchPhotos({term: this.props.search, image_size: 440});
     return (
           <div>
             <h3>Photo Map App</h3>
@@ -23,16 +23,16 @@ class PhotoGallery extends Component {
 }
 
 PhotoGallery.propTypes = {
-  getPhotos: React.PropTypes.func.isRequired,
-  photos: React.PropTypes.array.isRequired,
-  handleInput: React.PropTypes.func.isRequired,
-  searchKeyword: React.PropTypes.string.isRequired,
-  searchPhotos: React.PropTypes.func.isRequired,
+  getPhotos: React.PropTypes.func,
+  photos: React.PropTypes.array,
+  handleInput: React.PropTypes.func,
+  search: React.PropTypes.string,
+  searchPhotos: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   photos: state.photos.list,
-  searchKeyword: state.photos.searchkeyWord,
+  search: state.photos.search,
 });
 
 const mapDispatchToProps = {
