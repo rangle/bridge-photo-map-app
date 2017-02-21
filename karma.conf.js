@@ -37,8 +37,11 @@ module.exports = (config) => {
         'sourcemap',
       ],
     },
-
     webpack: Object.assign({}, webpack, {
+      externals: {
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
+      },
       entry: './src/tests.entry.js',
       output: null,
       devtool: 'inline-source-map',
