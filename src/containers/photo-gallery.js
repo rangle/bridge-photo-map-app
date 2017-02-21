@@ -5,6 +5,7 @@ import { getPhotos, searchPhotos, handleInput } from '../actions/index';
 import Image from '../components/image';
 
 class PhotoGallery extends Component {
+  // This is temporary. Just to have pictures on load. Eventually, I'd image search gets a separate route from home.
   componentDidMount() {
     this.props.getPhotos();
   }
@@ -24,9 +25,9 @@ class PhotoGallery extends Component {
 
 PhotoGallery.propTypes = {
   getPhotos: React.PropTypes.func,
-  photos: React.PropTypes.array,
+  photos: React.PropTypes.array.isRequired,
   handleInput: React.PropTypes.func,
-  search: React.PropTypes.string,
+  search: React.PropTypes.string.isRequired,
   searchPhotos: React.PropTypes.func,
 };
 
