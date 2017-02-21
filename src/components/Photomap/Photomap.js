@@ -3,35 +3,29 @@ import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
 
-// TODO: A number of photos don't have lat/long location information – filter these out?
 class PhotoMap extends Component {
   constructor() {
     super();
-    this.initState = {
-      showingInfoWindow: false,
-      activeMarker: {},
-    };
-    this.state = this.initState;
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
   }
 
   onMarkerClick(props, marker) {
-    this.setState({
-      showingInfoWindow: true,
-      activeMarker: marker,
-    });
-    this.props.setselectedPhotoID(props.id);
+    this.props.setSelectedPhotoID(props.id);
+    this.props.setActiveMarker(marker);
+    this.props.showInfoWindow(true);
   }
 
   onInfoWindowClose() {
-    this.setState({ ...this.initState });
+    this.props.showInfoWindow(false);
+    this.props.setActiveMarker({});
   }
 
   onMapClicked() {
-    if (this.state.showingInfoWindow) {
-      this.setState({ ...this.initState });
+    if (this.props.showingInfoWindow) {
+      this.props.showInfoWindow(false);
+      this.props.setActiveMarker({});
     }
   }
 
@@ -54,8 +48,8 @@ class PhotoMap extends Component {
           onClick={this.onMarkerClick} /> )
         }
         <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
+          marker={this.props.activeMarker}
+          visible={this.props.showingInfoWindow}
           onClose={this.onInfoWindowClose}>
             <p>{this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID).name}</p>
         </InfoWindow>
@@ -67,8 +61,12 @@ class PhotoMap extends Component {
 PhotoMap.propTypes = {
   google: PropTypes.object,
   photos: PropTypes.array,
-  setselectedPhotoID: PropTypes.func,
+  setSelectedPhotoID: PropTypes.func,
   selectedPhotoID: PropTypes.number,
+  showInfoWindow: PropTypes.func,
+  showingInfoWindow: PropTypes.bool,
+  setActiveMarker: PropTypes.func,
+  activeMarker: PropTypes.object,
 };
 
 export default GoogleApiWrapper({
