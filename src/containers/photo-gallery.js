@@ -17,6 +17,7 @@ class PhotoGallery extends Component {
             <h3>Photo Map App</h3>
             <input onChange={handleKeyword} type="text"/>
             <button onClick={handleSearch} type="button">Search</button>
+            <h4>{this.props.status === true ? `#${this.props.search}` : ''}</h4>
             <Image photos={this.props.photos}/>
           </div>
     );
@@ -28,12 +29,14 @@ PhotoGallery.propTypes = {
   photos: React.PropTypes.array.isRequired,
   handleInput: React.PropTypes.func,
   search: React.PropTypes.string.isRequired,
+  status: React.PropTypes.bool,
   searchPhotos: React.PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   photos: state.photos.list,
   search: state.photos.search,
+  status: state.photos.status,
 });
 
 const mapDispatchToProps = {
