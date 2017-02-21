@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   showingInfoWindow: false,
   activeMarker: {},
   search: '',
+  searchKeyword: 'default',
 };
 
 // Reducer
@@ -21,6 +22,8 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{activeMarker: payload.activeMarker}};
   case ACTION_TYPES.searchPhotos:
     return {...state, ...{list: payload.search}};
+  case ACTION_TYPES.handleInput:
+    return {...state, ...{searchKeyword: payload.keyword}};
   default:
     return state;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPhotos, searchPhotos } from '../actions/index';
+import { getPhotos, searchPhotos, handleInput } from '../actions/index';
 import Image from '../components/image';
 
 class PhotoGallery extends Component {
@@ -9,12 +9,12 @@ class PhotoGallery extends Component {
     this.props.getPhotos();
   }
   render() {
-    const handleInput = (e) => console.log(e.target.value);
-    const handleSearch = () => this.props.searchPhotos();
+    const handleKeyword = (e) => this.props.handleInput(e.target.value);
+    const handleSearch = () => this.props.searchPhotos({term: this.props.searchKeyword, image_size: 440});
     return (
           <div>
             <h3>Photo Map App</h3>
-            <input onChange={handleInput} type="text"/>
+            <input onChange={handleKeyword} type="text"/>
             <button onClick={handleSearch} type="button">Search</button>
             <Image photos={this.props.photos}/>
           </div>
@@ -25,15 +25,19 @@ class PhotoGallery extends Component {
 PhotoGallery.propTypes = {
   getPhotos: React.PropTypes.func.isRequired,
   photos: React.PropTypes.array.isRequired,
+  handleInput: React.PropTypes.func.isRequired,
+  searchKeyword: React.PropTypes.string.isRequired,
   searchPhotos: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   photos: state.photos.list,
+  searchKeyword: state.photos.searchkeyWord,
 });
 
 const mapDispatchToProps = {
   getPhotos,
+  handleInput,
   searchPhotos,
 };
 
