@@ -39,8 +39,8 @@ module.exports = (config) => {
     },
     webpack: Object.assign({}, webpack, {
       externals: {
-      'react/lib/ExecutionEnvironment': true,
-      'react/lib/ReactContext': true
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
       },
       entry: './src/tests.entry.js',
       output: null,
