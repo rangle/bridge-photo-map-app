@@ -6,6 +6,7 @@ export const ACTION_TYPES = {
   showInfoWindow: 'SHOW_INFO_WINDOW',
   setActiveMarker: 'SET_ACTIVE_MARKER',
   searchPhotos: 'SEARCH_PHOTOS',
+  handleInput: 'HANDLE_INPUT',
 };
 
 // Actions
@@ -50,9 +51,9 @@ export function setActiveMarker(activeMarker) {
   };
 }
 
-export function searchPhotos() {
+export function searchPhotos(paramsObject) {
   return dispatch => {
-    get('photos/search', {term: 'pugs', image_size: 440})
+    get('photos/search', paramsObject)
     .then(response => {
       dispatch({
         type: ACTION_TYPES.searchPhotos,
@@ -61,5 +62,16 @@ export function searchPhotos() {
         },
       });
     });
-  }
-};
+  };
+}
+
+export function handleInput(keyword) {
+  return dispatch => {
+    dispatch({
+      type: ACTION_TYPES.handleInput,
+      payload: {
+        keyword: keyword,
+      },
+    });
+  };
+}
