@@ -9,7 +9,7 @@ export const ACTION_TYPES = {
   handleInput: 'HANDLE_INPUT',
 };
 
-// Actions
+// This handles loading photos on mount. Temporary.
 export function getPhotos() {
   return dispatch => {
     get('/photos', {feature: 'popular', image_size: 440})
@@ -51,20 +51,7 @@ export function setActiveMarker(activeMarker) {
   };
 }
 
-export function searchPhotos(paramsObject) {
-  return dispatch => {
-    get('photos/search', paramsObject)
-    .then(response => {
-      dispatch({
-        type: ACTION_TYPES.searchPhotos,
-        payload: {
-          search: response.photos,
-        },
-      });
-    });
-  };
-}
-
+// This updates the search state on input change so that we can access it when we call searchPhotos below.
 export function handleInput(keyword) {
   return dispatch => {
     dispatch({
@@ -72,6 +59,21 @@ export function handleInput(keyword) {
       payload: {
         keyword: keyword,
       },
+    });
+  };
+}
+
+// In photo-gallery.js, we pass the keyword stored in the state to the searchPhotos function.
+export function searchPhotos(keyword) {
+  return dispatch => {
+    get('photos/search', {term: keyword, image_size: 440})
+    .then(response => {
+      dispatch({
+        type: ACTION_TYPES.searchPhotos,
+        payload: {
+          search: response.photos,
+        },
+      });
     });
   };
 }
