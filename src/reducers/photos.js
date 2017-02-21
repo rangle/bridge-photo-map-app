@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   activeMarker: {},
   search: '',
   searchKeyword: 'default',
+  search: 'default',
 };
 
 // Reducer
@@ -23,7 +24,7 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
   case ACTION_TYPES.searchPhotos:
     return {...state, ...{list: payload.search}};
   case ACTION_TYPES.handleInput:
-    return {...state, ...{searchKeyword: payload.keyword}};
+    return {...state, ...{search: payload.keyword}};
   default:
     return state;
   }
