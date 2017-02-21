@@ -11,7 +11,7 @@ class PhotoGallery extends Component {
   }
   render() {
     const handleKeyword = (e) => this.props.handleInput(e.target.value);
-    const handleSearch = () => this.props.searchPhotos({term: this.props.search, image_size: 440});
+    const handleSearch = () => this.props.searchPhotos(this.props.search);
     return (
           <div>
             <h3>Photo Map App</h3>
