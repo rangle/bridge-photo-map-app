@@ -5,7 +5,7 @@ import { getPhotos, searchPhotos, handleInput } from '../actions/index';
 import Image from '../components/image';
 
 class PhotoGallery extends Component {
-  // This is temporary. Just to have pictures on load. Eventually, I'd image search gets a separate route from home.
+  // This is temporary. Just to have pictures on load. Eventually, I'd imagine image search gets a separate route from home.
   componentDidMount() {
     this.props.getPhotos();
   }
