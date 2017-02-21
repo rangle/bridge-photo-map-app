@@ -72,6 +72,7 @@ export function searchPhotos(keyword) {
         type: ACTION_TYPES.searchPhotos,
         payload: {
           search: response.photos,
+          status: true,
         },
       });
     });
