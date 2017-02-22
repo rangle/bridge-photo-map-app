@@ -6,16 +6,21 @@ import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.handleKeyword = this.handleKeyword.bind(this);
+  }
+
   componentDidMount() {
     this.props.getPhotos();
   }
+
   render() {
-    const handleKeyword = (e) => this.props.handleInput(e.target.value);
     const handleSearch = () => this.props.searchPhotos(this.props.search);
     return (
       <main>
         <h3>Photo Map App</h3>
-        <input onChange={handleKeyword} type="text"/>
+        <input onChange={this.handleKeyword} type="text"/>
         <button onClick={handleSearch} type="button">Search</button>
         <h4>{this.props.status === true ? `#${this.props.search}` : ''}</h4>
         <PhotoGallery photos={this.props.photos} />
@@ -29,6 +34,10 @@ class App extends Component {
           activeMarker={this.props.activeMarker} />
       </main>
     );
+  }
+
+  handleKeyword(e) {
+    this.props.handleInput(e.target.value);
   }
 }
 
