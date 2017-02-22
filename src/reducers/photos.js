@@ -5,7 +5,6 @@ const INITIAL_STATE = {
   selectedPhotoID: NaN,
   showingInfoWindow: false,
   activeMarker: {},
-  search: '',
   searchKeyword: 'default',
   search: 'default',
   status: false,
