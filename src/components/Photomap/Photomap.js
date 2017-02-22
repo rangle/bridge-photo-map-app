@@ -51,7 +51,7 @@ class PhotoMap extends Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
           onClose={this.onInfoWindowClose}>
-            <p>{this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID).name}</p>
+            <p>{this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID).name || 'N/A'}</p>
         </InfoWindow>
       </Map>
     );

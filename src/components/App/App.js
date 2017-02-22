@@ -9,6 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.handleKeyword = this.handleKeyword.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
@@ -16,13 +17,12 @@ class App extends Component {
   }
 
   render() {
-    const handleSearch = () => this.props.searchPhotos(this.props.search);
     return (
       <main>
         <h3>Photo Map App</h3>
         <input onChange={this.handleKeyword} type="text"/>
-        <button onClick={handleSearch} type="button">Search</button>
-        <h4>{this.props.status === true ? `#${this.props.search}` : ''}</h4>
+        <button onClick={this.handleSearch} type="button">Search</button>
+        <h4>{this.props.status && `#${this.props.search}`}</h4>
         <PhotoGallery photos={this.props.photos} />
         <PhotoMap
           photos={this.props.photos}
@@ -38,6 +38,9 @@ class App extends Component {
 
   handleKeyword(e) {
     this.props.handleInput(e.target.value);
+  }
+  handleSearch() {
+    this.props.searchPhotos(this.props.search);
   }
 }
 
