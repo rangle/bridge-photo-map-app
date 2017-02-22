@@ -5,12 +5,9 @@ export const ACTION_TYPES = {
   setSelectedPhotoID: 'SET_SELECTED_PHOTO_ID',
   showInfoWindow: 'SHOW_INFO_WINDOW',
   setActiveMarker: 'SET_ACTIVE_MARKER',
-<<<<<<< HEAD
   searchPhotos: 'SEARCH_PHOTOS',
   handleInput: 'HANDLE_INPUT',
-=======
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
->>>>>>> related photos displaying based on hardcoded geolocation under map
 };
 
 // This handles loading photos on mount. Temporary.
