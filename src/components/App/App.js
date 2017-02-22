@@ -1,18 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getPhotos, setSelectedPhotoID, showInfoWindow, setActiveMarker } from '../../actions/index';
+import { getPhotos, setSelectedPhotoID, showInfoWindow, setActiveMarker, searchPhotos, handleInput  } from '../../actions/index';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.handleKeyword = this.handleKeyword.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
+
   componentDidMount() {
     this.props.getPhotos();
   }
+
   render() {
     return (
       <main>
         <h3>Photo Map App</h3>
+        <input onChange={this.handleKeyword} type="text"/>
+        <button onClick={this.handleSearch} type="button">Search</button>
+        <h4>{this.props.status && `#${this.props.search}`}</h4>
         <PhotoGallery photos={this.props.photos} />
         <PhotoMap
           photos={this.props.photos}
@@ -25,6 +35,13 @@ class App extends Component {
       </main>
     );
   }
+
+  handleKeyword(e) {
+    this.props.handleInput(e.target.value);
+  }
+  handleSearch() {
+    this.props.searchPhotos(this.props.search);
+  }
 }
 
 App.propTypes = {
@@ -36,6 +53,10 @@ App.propTypes = {
   showingInfoWindow: PropTypes.bool,
   setActiveMarker: PropTypes.func,
   activeMarker: PropTypes.object,
+  handleInput: PropTypes.func,
+  search: PropTypes.string.isRequired,
+  status: PropTypes.bool,
+  searchPhotos: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -43,6 +64,8 @@ const mapStateToProps = state => ({
   selectedPhotoID: state.photos.selectedPhotoID,
   showingInfoWindow: state.photos.showingInfoWindow,
   activeMarker: state.photos.activeMarker,
+  search: state.photos.search,
+  status: state.photos.status,
 });
 
 const mapDispatchToProps = {
@@ -50,6 +73,8 @@ const mapDispatchToProps = {
   setSelectedPhotoID,
   showInfoWindow,
   setActiveMarker,
+  handleInput,
+  searchPhotos,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
