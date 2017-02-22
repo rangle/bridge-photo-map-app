@@ -1,9 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getPhotos, setSelectedPhotoID, showInfoWindow, setActiveMarker, searchPhotos, handleInput  } from '../../actions/index';
+import {
+  getPhotos,
+  setSelectedPhotoID,
+  showInfoWindow,
+  setActiveMarker,
+  searchPhotos,
+  handleInput,
+  getRelatedPhotos,
+} from '../../actions/index';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
+import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 
 class App extends Component {
   constructor() {
@@ -14,6 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getPhotos();
+    this.props.getRelatedPhotos();
   }
 
   render() {
@@ -32,6 +42,7 @@ class App extends Component {
           showingInfoWindow={this.props.showingInfoWindow}
           setActiveMarker={this.props.setActiveMarker}
           activeMarker={this.props.activeMarker} />
+        <RelatedPhotoGallery photos={this.props.relatedPhotos} />
       </main>
     );
   }
@@ -57,6 +68,8 @@ App.propTypes = {
   search: PropTypes.string.isRequired,
   status: PropTypes.bool,
   searchPhotos: PropTypes.func,
+  getRelatedPhotos: PropTypes.func,
+  relatedPhotos: PropTypes.array,
 };
 
 const mapStateToProps = state => ({
@@ -66,6 +79,7 @@ const mapStateToProps = state => ({
   activeMarker: state.photos.activeMarker,
   search: state.photos.search,
   status: state.photos.status,
+  relatedPhotos: state.photos.relatedList,
 });
 
 const mapDispatchToProps = {
@@ -75,6 +89,7 @@ const mapDispatchToProps = {
   setActiveMarker,
   handleInput,
   searchPhotos,
+  getRelatedPhotos,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

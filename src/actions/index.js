@@ -7,6 +7,7 @@ export const ACTION_TYPES = {
   setActiveMarker: 'SET_ACTIVE_MARKER',
   searchPhotos: 'SEARCH_PHOTOS',
   handleInput: 'HANDLE_INPUT',
+  getRelatedPhotos: 'GET_RELATED_PHOTOS',
 };
 
 // This handles loading photos on mount. Temporary.
@@ -74,6 +75,20 @@ export function searchPhotos(keyword) {
         payload: {
           search: response.photos,
           status: true,
+        },
+      });
+    });
+  };
+}
+
+export function getRelatedPhotos() {
+  return dispatch => {
+    get('/photos/search', { geo: '43.6532,-79.3832,1km' })
+    .then(response => {
+      dispatch({
+        type: ACTION_TYPES.getRelatedPhotos,
+        payload: {
+          photos: response.photos,
         },
       });
     });
