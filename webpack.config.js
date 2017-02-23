@@ -60,8 +60,8 @@ module.exports = {
   postcss: postcss,
 
   externals: {
-    'react/lib/ReactContext': true,
-    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': 'window',
+    'react/lib/ExecutionEnvironment': 'window',
     'react/addons': true,
   },
 };
