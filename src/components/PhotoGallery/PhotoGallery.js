@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-
 import Images from '../Images/Images';
 
 export default function PhotoGallery({
