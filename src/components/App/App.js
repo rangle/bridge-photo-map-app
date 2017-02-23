@@ -31,7 +31,7 @@ class App extends Component {
       <main>
         <h3>Photo Map App</h3>
         <input onChange={this.handleKeyword} type="text"/>
-        <button onClick={this.handleSearch} type="button">Search</button>
+        <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
         <h4>{this.props.status && `#${this.props.search}`}</h4>
         <PhotoGallery photos={this.props.photos} />
         <PhotoMap
