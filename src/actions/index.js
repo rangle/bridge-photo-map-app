@@ -15,7 +15,11 @@ export const ACTION_TYPES = {
 // This handles loading photos on mount. Temporary.
 export function getPhotos() {
   return dispatch => {
+<<<<<<< HEAD
     get('/photos', {feature: 'popular', image_size: [440, 1]})
+=======
+    get('/photos', {feature: 'popular', image_size: [1, 440]})
+>>>>>>> getCurrentLocation action
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -70,7 +74,11 @@ export function handleInput(keyword) {
 // In photo-gallery.js, we pass the keyword stored in the state to the searchPhotos function.
 export function searchPhotos(keyword) {
   return dispatch => {
+<<<<<<< HEAD
     get('photos/search', {term: keyword, image_size: [440, 1]})
+=======
+    get('photos/search', {term: keyword, image_size: [1, 440]})
+>>>>>>> getCurrentLocation action
     .then(response => {
       dispatch({
         type: ACTION_TYPES.searchPhotos,
