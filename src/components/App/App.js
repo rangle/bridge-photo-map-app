@@ -41,7 +41,8 @@ class App extends Component {
           showInfoWindow={this.props.showInfoWindow}
           showingInfoWindow={this.props.showingInfoWindow}
           setActiveMarker={this.props.setActiveMarker}
-          activeMarker={this.props.activeMarker} />
+          activeMarker={this.props.activeMarker}
+          coords={this.props.coords} />
         <RelatedPhotoGallery photos={this.props.relatedPhotos} />
       </main>
     );
@@ -70,6 +71,7 @@ App.propTypes = {
   searchPhotos: PropTypes.func,
   getRelatedPhotos: PropTypes.func,
   relatedPhotos: PropTypes.array,
+  coords: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
@@ -80,6 +82,7 @@ const mapStateToProps = state => ({
   search: state.photos.search,
   status: state.photos.status,
   relatedPhotos: state.photos.relatedList,
+  coords: state.photos.coords,
 });
 
 const mapDispatchToProps = {
