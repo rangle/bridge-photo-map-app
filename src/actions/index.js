@@ -98,7 +98,7 @@ export function getRelatedPhotos() {
 
 export function getCurrentLocation() {
   return dispatch => {
-    (navigator && navigator.geolocation) ? (
+    if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition( geoposition => {
         const {latitude, longitude} = geoposition.coords;
         dispatch({
@@ -110,7 +110,9 @@ export function getCurrentLocation() {
             },
           },
         });
-      })) : dispatch({
+      });
+    } else {
+      dispatch({
         type: ACTION_TYPES.getCurrentLocation,
         payload: {
           coords: {
@@ -119,5 +121,6 @@ export function getCurrentLocation() {
           },
         },
       });
+    }
   };
 }
