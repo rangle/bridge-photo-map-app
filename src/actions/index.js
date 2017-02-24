@@ -130,8 +130,6 @@ export function getPhotoDetails(params) {
   return dispatch => {
     get(`/photos/${params}`, {image_size: 4, comments: 1})
     .then(response => {
-      // console.log(typeof response.photo);
-      // console.log(typeof response.comments);
       dispatch({
         type: ACTION_TYPES.getPhotoDetails,
         payload: {
@@ -142,4 +140,3 @@ export function getPhotoDetails(params) {
     });
   };
 }
-   
