@@ -9,8 +9,8 @@ export default function Images({
   return (
     <div>
         {photos.map( (image, index) => (
-          <Link to={`/details/${image.id}`}>
-            <Image key={index} photo={image} size={440} />
+          <Link key={index} to={`/details/${image.id}`}>
+            <Image photo={image} size={200} />
           </Link>
         ))}
     </div>
