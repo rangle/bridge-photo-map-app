@@ -3,7 +3,7 @@ import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
 
-class PhotoMap extends Component {
+export default class PhotoMap extends Component {
   constructor() {
     super();
     this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -75,7 +75,7 @@ PhotoMap.propTypes = {
   activeMarker: PropTypes.object,
   coords: PropTypes.object,
 };
-
-export default GoogleApiWrapper({
-  apiKey: GOOGLE_MAP_API_KEY,
-})(PhotoMap);
+//
+// export default GoogleApiWrapper({
+//   apiKey: GOOGLE_MAP_API_KEY,
+// })(PhotoMap);
