@@ -1,4 +1,5 @@
 import React, { PropTypes as T } from 'react';
+import { Link } from 'react-router';
 
 export default function Image({
   photo,
@@ -13,7 +14,11 @@ export default function Image({
   };
 
   return (
-    <picture><img className="z-depth-3" src={getPhotoUrl(size, photo)} /></picture>
+    <Link to={(photo && photo.id) ? `/details/${photo.id}` : '#'}>
+      <picture>
+        <img className="z-depth-3" src={getPhotoUrl(size, photo)} />
+      </picture>
+    </Link>
   );
 }
 

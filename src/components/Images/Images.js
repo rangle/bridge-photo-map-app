@@ -1,5 +1,4 @@
 import React, { PropTypes as T } from 'react';
-import { Link } from 'react-router';
 
 import Image from './Image';
 
@@ -8,11 +7,7 @@ export default function Images({
 }) {
   return (
     <div>
-        {photos.map( (image, index) => (
-          <Link key={index} to={`/details/${image.id}`}>
-            <Image photo={image} size={200} />
-          </Link>
-        ))}
+        {photos.map( (image, index) => <Image key={index} photo={image} size={200} />)}
     </div>
   );
 }
