@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
+import Image from '../Images/Image';
 
 class PhotoMap extends Component {
   constructor() {
@@ -40,7 +41,7 @@ class PhotoMap extends Component {
   render() {
     return (
       <Map
-        style={{width: '90%', height: '50%', display: 'block', margin: '0 auto'}}
+        style={{width: '80%', height: '50%', display: 'block', margin: '0 auto'}}
         google={this.props.google}
         initialCenter={{...this.props.coords}}
         centerAroundCurrentLocation
@@ -57,7 +58,10 @@ class PhotoMap extends Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
           onClose={this.onInfoWindowClose}>
-            <p>{this.getNamefromPhoto(this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID))}</p>
+            <div>
+              <h6>{this.getNamefromPhoto(this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID))}</h6>
+              <Image photo={this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID)} size={1} />
+            </div>
         </InfoWindow>
       </Map>
     );
