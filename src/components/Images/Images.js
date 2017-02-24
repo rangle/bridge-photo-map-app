@@ -1,31 +1,22 @@
-import React from 'react';
+import React, { PropTypes as T } from 'react';
 import { Link } from 'react-router';
 
-const Images = ({ photos }) => (
-    <div>
-    {photos.map((image, index) => {
-      return (
-        <div key={index}>
-            <div>
-              <Link to={`/details/${image.id}`}>
-                <img className="z-depth-3" src={image.image_url}/>
-              </Link>
-            </div>
-            <div>
-              <h5>{image.name}</h5>
-              <p>Camera: {image.camera}</p>
-              <p>Aperture: {image.aperture}</p>
-              <p>Focal Length: {image.focal_length}</p>
-            </div>
-        </div>
-      );
-    })}
-    </div>
-);
+import Image from './Image';
 
+export default function Images({
+  photos,
+}) {
+  return (
+    <div>
+        {photos.map( (image, index) => (
+          <Link to={`/details/${image.id}`}>
+            <Image key={index} photo={image} size={440} />
+          </Link>
+        ))}
+    </div>
+  );
+}
 
 Images.propTypes = {
-  photos: React.PropTypes.array,
+  photos: T.array,
 };
-
-export default Images;
