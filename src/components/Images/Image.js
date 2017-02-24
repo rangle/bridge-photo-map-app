@@ -5,8 +5,11 @@ export default function Image({
   size,
 }) {
   const getPhotoUrl = (s, img) => {
-    const source = img.images.find( i => i.size === s );
-    return source ? (source.https_url || source.url) : '';
+    if (img && img.images) {
+      const source = img.images.find( i => i.size === s );
+      return source ? (source.https_url || source.url) : '';
+    }
+    return '';
   };
 
   return (
