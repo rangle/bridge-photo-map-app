@@ -3,7 +3,7 @@ import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
 
-export class PhotoMap extends Component {
+class PhotoMap extends Component {
   constructor() {
     super();
     this.onMarkerClick = this.onMarkerClick.bind(this);
