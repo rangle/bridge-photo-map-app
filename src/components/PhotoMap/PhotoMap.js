@@ -75,7 +75,7 @@ PhotoMap.propTypes = {
   activeMarker: PropTypes.object,
   coords: PropTypes.object,
 };
-//
-// export default GoogleApiWrapper({
-//   apiKey: GOOGLE_MAP_API_KEY,
-// })(PhotoMap);
+
+export default GoogleApiWrapper({
+  apiKey: GOOGLE_MAP_API_KEY,
+})(PhotoMap);
