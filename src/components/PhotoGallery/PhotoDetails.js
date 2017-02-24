@@ -1,35 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { get } from '../../api/request';
+import { connect } from 'react-redux';
+import { getPhotoDetails } from '../../actions/index';
 
-export default class PhotoDetails extends Component {
-  constructor() {
-    super();
-    this.state = {
-      photo: '',
-      comments: [],
-    };
-  }
-
+class PhotoDetails extends Component {
   componentDidMount() {
-    get(`/photos/${this.props.params.id}`, {image_size: 4, comments: 1})
-    .then(response => {
-      console.log(response);
-      console.log(response.photo.comments_count);
-      this.setState({
-        photo: response.photo,
-        comments: response.comments,
-      });
-    });
+    this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
+    const { photo, comments } = this.props;
     return (
       <div className="container">
-        <h2>{this.state.photo.name}</h2>
-          <img className="z-depth-4" src={this.state.photo.image_url}/>
+        <h2>{photo.name}</h2>
+          <img className="z-depth-4" src={photo.image_url}/>
         <h5>Comments</h5>
-          <span>{this.state.photo.votes_count} Votes</span>
-          {this.state.comments.length !== 0 ? this.state.comments.map((comment, index) => {
+          <span>{photo.votes_count} Votes</span>
+          {comments.length !== 0 ? comments.map((comment, index) => {
             return <p key={index}>{comment.body}</p>;
           }) : <p>No comments have been left for this photo. Be the first!</p>}
         <p><Link to="/">Back</Link></p>
@@ -40,6 +26,19 @@ export default class PhotoDetails extends Component {
 
 PhotoDetails.propTypes = {
   photo: PropTypes.object,
+  comments: PropTypes.array,
   params: PropTypes.object,
   id: PropTypes.number,
+  getPhotoDetails: PropTypes.func,
 };
+
+const mapStateToProps = state => ({
+  photo: state.photos.photo,
+  comments: state.photos.comments,
+});
+
+const mapDispatchToProps = {
+  getPhotoDetails,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoDetails);

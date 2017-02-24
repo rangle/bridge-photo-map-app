@@ -12,6 +12,8 @@ const INITIAL_STATE = {
     lat: 43.6726438,
     lng: -79.3866517,
   },
+  photo: {},
+  comments: [],
 };
 
 // Reducer
@@ -33,6 +35,8 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{relatedList: payload.photos}};
   case ACTION_TYPES.getCurrentLocation:
     return {...state, ...{coords: payload.coords}};
+  case ACTION_TYPES.getPhotoDetails:
+    return {...state, ...{photo: payload.photo, comments: payload.comments}};
   default:
     return state;
   }

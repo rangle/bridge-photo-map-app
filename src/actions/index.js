@@ -7,6 +7,7 @@ export const ACTION_TYPES = {
   setActiveMarker: 'SET_ACTIVE_MARKER',
   searchPhotos: 'SEARCH_PHOTOS',
   handleInput: 'HANDLE_INPUT',
+  getPhotoDetails: 'PHOTO_DETAILS',
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
   getCurrentLocation: 'GET_CURRENT_LOCATION',
 };
@@ -14,7 +15,7 @@ export const ACTION_TYPES = {
 // This handles loading photos on mount. Temporary.
 export function getPhotos() {
   return dispatch => {
-    get('/photos', {feature: 'popular', image_size: 440})
+    get('/photos', {feature: 'popular', image_size: [440, 1]})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -69,7 +70,7 @@ export function handleInput(keyword) {
 // In photo-gallery.js, we pass the keyword stored in the state to the searchPhotos function.
 export function searchPhotos(keyword) {
   return dispatch => {
-    get('photos/search', {term: keyword, image_size: 440})
+    get('photos/search', {term: keyword, image_size: [440, 1]})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.searchPhotos,
@@ -124,3 +125,21 @@ export function getCurrentLocation() {
     }
   };
 }
+
+export function getPhotoDetails(params) {
+  return dispatch => {
+    get(`/photos/${params}`, {image_size: 4, comments: 1})
+    .then(response => {
+      // console.log(typeof response.photo);
+      // console.log(typeof response.comments);
+      dispatch({
+        type: ACTION_TYPES.getPhotoDetails,
+        payload: {
+          photo: response.photo,
+          comments: response.comments,
+        },
+      });
+    });
+  };
+}
+   
