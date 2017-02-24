@@ -5,14 +5,14 @@ machine:
   node:
     version: 6
 
-#dependencies:
-#  pre:
-#    - npm install -g yarn@0.16.1
-#  override:
-#    - yarn install
-#test:
-#  override:
-#    - npm test
+dependencies:
+  pre:
+    - npm install -g yarn@0.16.1
+  override:
+    - yarn install
+test:
+  override:
+    - npm test
 general:
   artifacts:
     - "./coverage"
