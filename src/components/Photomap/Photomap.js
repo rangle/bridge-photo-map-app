@@ -30,15 +30,21 @@ class PhotoMap extends Component {
   }
 
   getPhotoFromID(photos, id) {
-    return (photos.length && id) ? photos.find( photo => photo.id === id ) : { name: 'N/A' };
+    return (photos.length && id) ? photos.find( photo => photo.id === id ) : null;
+  }
+
+  getNamefromPhoto(photo) {
+    return (photo && photo.name) ? photo.name : 'N/A';
   }
 
   render() {
     return (
       <Map
-        google={this.props.google}
         style={{width: '90%', height: '50%', display: 'block', margin: '0 auto'}}
-        zoom={3}
+        google={this.props.google}
+        initialCenter={{...this.props.coords}}
+        centerAroundCurrentLocation
+        zoom={5}
         onClick={this.onMapClicked}>
         { this.props.photos.map( (photo) => <Marker
           key={photo.id}
@@ -51,7 +57,7 @@ class PhotoMap extends Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
           onClose={this.onInfoWindowClose}>
-            <p>{this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID).name || 'N/A'}</p>
+            <p>{this.getNamefromPhoto(this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID))}</p>
         </InfoWindow>
       </Map>
     );
@@ -67,6 +73,7 @@ PhotoMap.propTypes = {
   showingInfoWindow: PropTypes.bool,
   setActiveMarker: PropTypes.func,
   activeMarker: PropTypes.object,
+  coords: PropTypes.object,
 };
 
 export default GoogleApiWrapper({

@@ -8,6 +8,7 @@ export const ACTION_TYPES = {
   searchPhotos: 'SEARCH_PHOTOS',
   handleInput: 'HANDLE_INPUT',
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
+  getCurrentLocation: 'GET_CURRENT_LOCATION',
 };
 
 // This handles loading photos on mount. Temporary.
@@ -92,5 +93,34 @@ export function getRelatedPhotos() {
         },
       });
     });
+  };
+}
+
+export function getCurrentLocation() {
+  return dispatch => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition( geoposition => {
+        const {latitude, longitude} = geoposition.coords;
+        dispatch({
+          type: ACTION_TYPES.getCurrentLocation,
+          payload: {
+            coords: {
+              lat: latitude,
+              lng: longitude,
+            },
+          },
+        });
+      });
+    } else {
+      dispatch({
+        type: ACTION_TYPES.getCurrentLocation,
+        payload: {
+          coords: {
+            lat: 43.6726438,
+            lng: -79.3866517,
+          },
+        },
+      });
+    }
   };
 }
