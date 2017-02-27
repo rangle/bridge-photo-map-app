@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import App from '../components/App/App';
-import PhotoDetails from '../components/PhotoGallery/PhotoDetails';
+import PhotoDetails from '../components/PhotoDetails/PhotoDetails';
 
 export default (
   <Router history={ browserHistory }>
