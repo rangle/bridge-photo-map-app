@@ -41,6 +41,7 @@ module.exports = (config) => {
       externals: {
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
+        'react/addons': true,
       },
       entry: './src/tests.entry.js',
       output: null,
