@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
-import Image from '../Images/Image';
+import Image from '../Image/Image';
 
 class PhotoMap extends Component {
   constructor() {
