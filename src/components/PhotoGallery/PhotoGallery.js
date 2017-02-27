@@ -5,9 +5,7 @@ export default function PhotoGallery({
   photos,
 }) {
   return (
-    <div>
-      <Images photos={photos}/>
-    </div>
+    <Images photos={photos}/>
   );
 }
 
