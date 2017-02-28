@@ -53,9 +53,16 @@ class PhotoMap extends Component {
 
     return (
       <Map
+<<<<<<< HEAD
         style={{width: '80%', height: '75%', display: 'block', margin: '0 auto'}}
         google={google}
         initialCenter={{...coords}}
+=======
+
+        style={{width: '80%', height: '75%', display: 'block', margin: '0 auto'}}
+        google={this.props.google}
+        initialCenter={{...this.props.coords}}
+>>>>>>> change height from 50 to 75%
         centerAroundCurrentLocation
         zoom={5}
         onClick={this.onMapClicked}>
