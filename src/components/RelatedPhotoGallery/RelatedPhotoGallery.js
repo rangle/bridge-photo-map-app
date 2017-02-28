@@ -1,16 +1,29 @@
-import React, { PropTypes as T } from 'react';
+import React, { Component, PropTypes as T } from 'react';
+import { connect } from 'react-redux';
+import { getRelatedPhotos } from '../../actions/index';
 
-import Images from '../Images/Images';
-
-export default function RelatedPhotoGallery({
-  photos,
-}) {
-  // get('/photos/search', { geo: '43.6532,-79.3832,1km' }).then(res => console.log(res));
-  return (
-      <Images photos={photos}/>
-  );
+class RelatedPhotoGallery extends Component {
+  render() {
+    return (
+    <div>
+      <h5>Recommended For You</h5>
+    </div>
+    );
+  }
 }
 
 RelatedPhotoGallery.propTypes = {
-  photos: T.array,
+  tags: T.array,
+  relatedPhotos: T.func,
+  getRelatedPhotos: T.func,
 };
+
+const mapStateToProps = state => ({
+  relatedList: state.photos.relatedList,
+});
+
+const mapDispatchToProps = {
+  getRelatedPhotos,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RelatedPhotoGallery);
