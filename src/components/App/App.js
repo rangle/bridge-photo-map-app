@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -57,21 +57,21 @@ class App extends Component {
 }
 
 App.propTypes = {
-  getPhotos: PropTypes.func.isRequired,
-  photos: PropTypes.array.isRequired,
-  setSelectedPhotoID: PropTypes.func,
-  selectedPhotoID: PropTypes.number,
-  showInfoWindow: PropTypes.func,
-  showingInfoWindow: PropTypes.bool,
-  setActiveMarker: PropTypes.func,
-  activeMarker: PropTypes.object,
-  handleInput: PropTypes.func,
-  search: PropTypes.string.isRequired,
-  status: PropTypes.bool,
-  searchPhotos: PropTypes.func,
-  getRelatedPhotos: PropTypes.func,
-  relatedPhotos: PropTypes.array,
-  coords: PropTypes.object,
+  getPhotos: T.func.isRequired,
+  photos: T.array.isRequired,
+  setSelectedPhotoID: T.func,
+  selectedPhotoID: T.number,
+  showInfoWindow: T.func,
+  showingInfoWindow: T.bool,
+  setActiveMarker: T.func,
+  activeMarker: T.object,
+  handleInput: T.func,
+  search: T.string.isRequired,
+  status: T.bool,
+  searchPhotos: T.func,
+  getRelatedPhotos: T.func,
+  relatedPhotos: T.array,
+  coords: T.object,
 };
 
 const mapStateToProps = state => ({

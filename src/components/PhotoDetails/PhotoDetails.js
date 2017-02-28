@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes as T } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getPhotoDetails } from '../../actions/index';
@@ -25,11 +25,11 @@ class PhotoDetails extends Component {
 }
 
 PhotoDetails.propTypes = {
-  photo: PropTypes.object,
-  comments: PropTypes.array,
-  params: PropTypes.object,
-  id: PropTypes.number,
-  getPhotoDetails: PropTypes.func,
+  photo: T.object,
+  comments: T.array,
+  params: T.object,
+  id: T.number,
+  getPhotoDetails: T.func,
 };
 
 const mapStateToProps = state => ({

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes as T } from 'react';
 import Images from '../Images/Images';
 
 export default function PhotoGallery({
@@ -10,5 +10,5 @@ export default function PhotoGallery({
 }
 
 PhotoGallery.propTypes = {
-  photos: PropTypes.array.isRequired,
+  photos: T.array.isRequired,
 };
