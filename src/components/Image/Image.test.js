@@ -13,13 +13,6 @@ function setup(photo = {}, size = 0) {
 
 describe('Image component', () => {
   const wrapper = setup();
-  const wrapperHasImgSrc = setup({
-    images: [{
-      size: 0,
-      https_url: 'https_url',
-    }],
-  });
-
   let link;
   let picture;
   let img;
@@ -44,6 +37,12 @@ describe('Image component', () => {
   });
 
   it('has an non-empty source attribute', () => {
+    const wrapperHasImgSrc = setup({
+      images: [{
+        size: 0,
+        https_url: 'https_url',
+      }],
+    });
     expect(wrapperHasImgSrc.find('img').prop('src')).toBe('https_url');
   });
 });
