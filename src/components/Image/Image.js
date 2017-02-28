@@ -1,5 +1,6 @@
 import React, { PropTypes as T } from 'react';
 import { Link } from 'react-router';
+import './Image.css';
 
 export default function Image({
   photo,
@@ -25,4 +26,5 @@ export default function Image({
 Image.propTypes = {
   photo: T.object,
   size: T.number,
+  tags: T.array,
 };
