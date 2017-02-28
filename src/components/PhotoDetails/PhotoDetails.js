@@ -2,9 +2,10 @@ import React, { Component, PropTypes as T } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { getPhotoDetails } from '../../actions/index';
+import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 
 class PhotoDetails extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
@@ -18,6 +19,7 @@ class PhotoDetails extends Component {
           {comments.length !== 0 ? comments.map((comment, index) => {
             return <p key={index}>{comment.body}</p>;
           }) : <p>No comments have been left for this photo. Be the first!</p>}
+          <RelatedPhotoGallery tags={photo.tags}/>
         <p><Link to="/">Back</Link></p>
       </div>
     );
