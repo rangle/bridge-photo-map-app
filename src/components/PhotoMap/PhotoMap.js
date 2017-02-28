@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes as T } from 'react';
 import Map, { Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
 
 import { GOOGLE_MAP_API_KEY } from '../../config/api';
@@ -13,20 +13,23 @@ class PhotoMap extends Component {
   }
 
   onMarkerClick(props, marker) {
-    this.props.setSelectedPhotoID(props.id);
-    this.props.setActiveMarker(marker);
-    this.props.showInfoWindow(true);
+    const { setSelectedPhotoID, setActiveMarker, showInfoWindow } = this.props;
+    setSelectedPhotoID(props.id);
+    setActiveMarker(marker);
+    showInfoWindow(true);
   }
 
   onInfoWindowClose() {
-    this.props.showInfoWindow(false);
-    this.props.setActiveMarker({});
+    const { setActiveMarker, showInfoWindow } = this.props;
+    showInfoWindow(false);
+    setActiveMarker({});
   }
 
   onMapClicked() {
-    if (this.props.showingInfoWindow) {
-      this.props.showInfoWindow(false);
-      this.props.setActiveMarker({});
+    const { setActiveMarker, showInfoWindow } = this.props;
+    if (showingInfoWindow) {
+      showInfoWindow(false);
+      setActiveMarker({});
     }
   }
 
@@ -39,15 +42,24 @@ class PhotoMap extends Component {
   }
 
   render() {
+    const {
+      google,
+      coords,
+      photos,
+      activeMarker,
+      showingInfoWindow,
+      selectedPhotoID,
+    } = this.props;
+
     return (
       <Map
         style={{width: '80%', height: '50%', display: 'block', margin: '0 auto'}}
-        google={this.props.google}
-        initialCenter={{...this.props.coords}}
+        google={google}
+        initialCenter={{...coords}}
         centerAroundCurrentLocation
         zoom={5}
         onClick={this.onMapClicked}>
-        { this.props.photos.map( (photo) => <Marker
+        { photos.map( (photo) => <Marker
           key={photo.id}
           id={photo.id}
           name={photo.name || 'N/A'}
@@ -55,12 +67,12 @@ class PhotoMap extends Component {
           onClick={this.onMarkerClick} /> )
         }
         <InfoWindow
-          marker={this.props.activeMarker}
-          visible={this.props.showingInfoWindow}
+          marker={activeMarker}
+          visible={showingInfoWindow}
           onClose={this.onInfoWindowClose}>
             <div>
-              <h6>{this.getNamefromPhoto(this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID))}</h6>
-              <Image photo={this.getPhotoFromID(this.props.photos, this.props.selectedPhotoID)} size={1} />
+              <h6>{this.getNamefromPhoto(this.getPhotoFromID(photos, selectedPhotoID))}</h6>
+              <Image photo={this.getPhotoFromID(photos, selectedPhotoID)} size={1} />
             </div>
         </InfoWindow>
       </Map>
@@ -69,15 +81,15 @@ class PhotoMap extends Component {
 }
 
 PhotoMap.propTypes = {
-  google: PropTypes.object,
-  photos: PropTypes.array,
-  setSelectedPhotoID: PropTypes.func,
-  selectedPhotoID: PropTypes.number,
-  showInfoWindow: PropTypes.func,
-  showingInfoWindow: PropTypes.bool,
-  setActiveMarker: PropTypes.func,
-  activeMarker: PropTypes.object,
-  coords: PropTypes.object,
+  google: T.object,
+  photos: T.array,
+  setSelectedPhotoID: T.func,
+  selectedPhotoID: T.number,
+  showInfoWindow: T.func,
+  showingInfoWindow: T.bool,
+  setActiveMarker: T.func,
+  activeMarker: T.object,
+  coords: T.object,
 };
 
 export default GoogleApiWrapper({
