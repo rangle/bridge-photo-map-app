@@ -12,6 +12,7 @@ import {
 } from '../../actions/index';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
+import Header from '../Header/Header';
 
 class App extends Component {
   constructor() {
@@ -28,7 +29,7 @@ class App extends Component {
     return (
       <main>
         <form className="container">
-          <h3>Photo Map App</h3>
+          <Header/>
           <input onChange={this.handleKeyword} type="text"/>
           <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
           <h4>{this.props.status && `#${this.props.search}`}</h4>
