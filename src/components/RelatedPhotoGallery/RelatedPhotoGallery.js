@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
+
 import { getRelatedPhotos } from '../../actions/index';
 
 class RelatedPhotoGallery extends Component {
