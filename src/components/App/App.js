@@ -12,20 +12,23 @@ import {
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 import Header from '../Header/Header';
+import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
+import SearchForm from '../SearchForm';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.handleKeyword = this.handleKeyword.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
   componentDidMount() {
     this.props.getPhotos();
   }
 
   render() {
+    const { searchForm } = this.props;
+    const handleSearchSubmit = e => {
+      e.preventDefault();
+      return this.props.searchPhotos(searchForm.values.searchHashtag);
+    };
+
     return (
+<<<<<<< HEAD
       <div>
         <Header/>
         <main>
@@ -46,14 +49,25 @@ class App extends Component {
             coords={this.props.coords} />
         </main>
       </div>
+=======
+      <main>
+        <h3>Photo Map App</h3>
+        <SearchForm onSubmit={ handleSearchSubmit } />
+        <h4>{this.props.status && `#${this.props.search}`}</h4>
+        <PhotoGallery photos={this.props.photos} />
+        <PhotoMap
+          photos={this.props.photos}
+          setSelectedPhotoID={this.props.setSelectedPhotoID}
+          selectedPhotoID={this.props.selectedPhotoID}
+          showInfoWindow={this.props.showInfoWindow}
+          showingInfoWindow={this.props.showingInfoWindow}
+          setActiveMarker={this.props.setActiveMarker}
+          activeMarker={this.props.activeMarker}
+          coords={this.props.coords} />
+        <RelatedPhotoGallery photos={this.props.relatedPhotos} />
+      </main>
+>>>>>>> add redux form and hook up to search component
     );
-  }
-
-  handleKeyword(e) {
-    this.props.handleInput(e.target.value);
-  }
-  handleSearch() {
-    this.props.searchPhotos(this.props.search);
   }
 }
 
@@ -71,6 +85,7 @@ App.propTypes = {
   status: T.bool,
   searchPhotos: T.func.isRequired,
   coords: T.object,
+  searchForm: T.object,
 };
 
 const mapStateToProps = state => ({
@@ -82,6 +97,7 @@ const mapStateToProps = state => ({
   status: state.photos.status,
   relatedPhotos: state.photos.relatedList,
   coords: state.photos.coords,
+  searchForm: state.form.search,
 });
 
 const mapDispatchToProps = {

@@ -17,7 +17,7 @@ if (testing) {
 } else if (production) {
   jsloaders.push('babel?sourceMaps=true');
 } else {
-  jsloaders.push('react-hot-loader');
+  jsloaders.push('react-hot-loader/webpack');
   jsloaders.push('babel?sourceMaps=both');
 }
 

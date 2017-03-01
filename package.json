@@ -84,12 +84,11 @@
     "react": "15.3.0",
     "react-addons-test-utils": "15.3.0",
     "react-dom": "15.3.0",
-    "react-hot-loader": "^1.3.0",
     "react-redux": "^4.4.2",
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.0",
     "redux": "^3.3.1",
-    "redux-form": "^5.3.2",
+    "redux-form": "^6.5.0",
     "redux-localstorage": "^0.4.0",
     "redux-logger": "^2.1.4",
     "redux-thunk": "^2.0.1",
@@ -120,5 +119,8 @@
   },
   "bugs": {
     "url": "https://github.com/rangle/rangle-starter/issues"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^3.0.0-beta.6"
   }
 }
