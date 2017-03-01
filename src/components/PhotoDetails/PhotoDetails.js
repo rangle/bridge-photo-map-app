@@ -7,7 +7,7 @@ import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 import Header from '../Header/Header';
 
 class PhotoDetails extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
