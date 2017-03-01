@@ -27,24 +27,26 @@ class App extends Component {
 
   render() {
     return (
-      <main>
-        <form className="container">
-          <Header/>
-          <input onChange={this.handleKeyword} type="text"/>
-          <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
-          <h4>{this.props.status && `#${this.props.search}`}</h4>
-        </form>
-        <PhotoGallery photos={this.props.photos} />
-        <PhotoMap
-          photos={this.props.photos}
-          setSelectedPhotoID={this.props.setSelectedPhotoID}
-          selectedPhotoID={this.props.selectedPhotoID}
-          showInfoWindow={this.props.showInfoWindow}
-          showingInfoWindow={this.props.showingInfoWindow}
-          setActiveMarker={this.props.setActiveMarker}
-          activeMarker={this.props.activeMarker}
-          coords={this.props.coords} />
-      </main>
+      <div>
+        <Header/>
+        <main>
+          <form className="container">
+            <input onChange={this.handleKeyword} type="text"/>
+            <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
+            <h4>{this.props.status && `#${this.props.search}`}</h4>
+          </form>
+          <PhotoGallery photos={this.props.photos} />
+          <PhotoMap
+            photos={this.props.photos}
+            setSelectedPhotoID={this.props.setSelectedPhotoID}
+            selectedPhotoID={this.props.selectedPhotoID}
+            showInfoWindow={this.props.showInfoWindow}
+            showingInfoWindow={this.props.showingInfoWindow}
+            setActiveMarker={this.props.setActiveMarker}
+            activeMarker={this.props.activeMarker}
+            coords={this.props.coords} />
+        </main>
+      </div>
     );
   }
 
