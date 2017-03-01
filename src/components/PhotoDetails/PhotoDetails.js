@@ -18,7 +18,7 @@ class PhotoDetails extends Component {
   }
 
   render() {
-    const { photo, comments } = this.props;
+    const { photo, comments, relatedList } = this.props;
     return (
       <div>
         <Header/>
@@ -48,6 +48,7 @@ PhotoDetails.propTypes = {
 const mapStateToProps = state => ({
   photo: state.photos.photo,
   comments: state.photos.comments,
+  relatedList: state.photos.relatedList,
 });
 
 const mapDispatchToProps = {
