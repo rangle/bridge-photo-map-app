@@ -83,11 +83,11 @@ class PhotoMap extends Component {
 PhotoMap.propTypes = {
   google: T.object,
   photos: T.array,
-  setSelectedPhotoID: T.func,
+  setSelectedPhotoID: T.func.isRequired,
   selectedPhotoID: T.number,
-  showInfoWindow: T.func,
+  showInfoWindow: T.func.isRequired,
   showingInfoWindow: T.bool,
-  setActiveMarker: T.func,
+  setActiveMarker: T.func.isRequired,
   activeMarker: T.object,
   coords: T.object,
 };
