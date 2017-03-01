@@ -12,7 +12,6 @@ import {
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 import Header from '../Header/Header';
-import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 import SearchForm from '../SearchForm';
 
 class App extends Component {
@@ -28,15 +27,11 @@ class App extends Component {
     };
 
     return (
-<<<<<<< HEAD
       <div>
         <Header/>
         <main>
-          <form className="container">
-            <input onChange={this.handleKeyword} type="text"/>
-            <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
-            <h4>{this.props.status && `#${this.props.search}`}</h4>
-          </form>
+          <SearchForm onSubmit={ handleSearchSubmit } />
+          { searchForm && searchForm.values && <h4>{this.props.status && `#${searchForm.values.searchHashtag}`}</h4> }
           <PhotoGallery photos={this.props.photos} />
           <PhotoMap
             photos={this.props.photos}
@@ -49,24 +44,6 @@ class App extends Component {
             coords={this.props.coords} />
         </main>
       </div>
-=======
-      <main>
-        <h3>Photo Map App</h3>
-        <SearchForm onSubmit={ handleSearchSubmit } />
-        <h4>{this.props.status && `#${this.props.search}`}</h4>
-        <PhotoGallery photos={this.props.photos} />
-        <PhotoMap
-          photos={this.props.photos}
-          setSelectedPhotoID={this.props.setSelectedPhotoID}
-          selectedPhotoID={this.props.selectedPhotoID}
-          showInfoWindow={this.props.showInfoWindow}
-          showingInfoWindow={this.props.showingInfoWindow}
-          setActiveMarker={this.props.setActiveMarker}
-          activeMarker={this.props.activeMarker}
-          coords={this.props.coords} />
-        <RelatedPhotoGallery photos={this.props.relatedPhotos} />
-      </main>
->>>>>>> add redux form and hook up to search component
     );
   }
 }
