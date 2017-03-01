@@ -5,7 +5,7 @@ import { getPhotoDetails } from '../../actions/index';
 import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 
 class PhotoDetails extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
