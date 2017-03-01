@@ -53,7 +53,7 @@ class PhotoMap extends Component {
 
     return (
       <Map
-        style={{width: '80%', height: '50%', display: 'block', margin: '0 auto'}}
+        style={{width: '80%', height: '75%', display: 'block', margin: '0 auto'}}
         google={google}
         initialCenter={{...coords}}
         centerAroundCurrentLocation

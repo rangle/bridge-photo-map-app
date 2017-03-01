@@ -12,7 +12,6 @@ import {
 } from '../../actions/index';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
-import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 
 class App extends Component {
   constructor() {
@@ -23,16 +22,17 @@ class App extends Component {
 
   componentDidMount() {
     this.props.getPhotos();
-    this.props.getRelatedPhotos();
   }
 
   render() {
     return (
       <main>
-        <h3>Photo Map App</h3>
-        <input onChange={this.handleKeyword} type="text"/>
-        <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
-        <h4>{this.props.status && `#${this.props.search}`}</h4>
+        <form className="container">
+          <h3>Photo Map App</h3>
+          <input onChange={this.handleKeyword} type="text"/>
+          <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
+          <h4>{this.props.status && `#${this.props.search}`}</h4>
+        </form>
         <PhotoGallery photos={this.props.photos} />
         <PhotoMap
           photos={this.props.photos}
@@ -43,7 +43,6 @@ class App extends Component {
           setActiveMarker={this.props.setActiveMarker}
           activeMarker={this.props.activeMarker}
           coords={this.props.coords} />
-        <RelatedPhotoGallery photos={this.props.relatedPhotos} />
       </main>
     );
   }

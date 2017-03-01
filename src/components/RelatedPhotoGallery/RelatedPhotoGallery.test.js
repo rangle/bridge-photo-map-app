@@ -10,7 +10,7 @@ function setup(photos = []) {
   return shallow(<RelatedPhotoGallery {...props} />);
 }
 
-describe('RelatedPhotoGallery component', () => {
+xdescribe('RelatedPhotoGallery component', () => {
   it('renders an Images component', () => {
     const wrapper = setup();
     expect(wrapper.find('Images').length).toBe(1);

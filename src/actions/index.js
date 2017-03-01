@@ -15,7 +15,7 @@ export const ACTION_TYPES = {
 // This handles loading photos on mount. Temporary.
 export function getPhotos() {
   return dispatch => {
-    get('/photos', {feature: 'popular', image_size: [1, 200]})
+    get('/photos', {feature: 'popular', image_size: [1, 200], tags: 1})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -128,7 +128,7 @@ export function getCurrentLocation() {
 
 export function getPhotoDetails(params) {
   return dispatch => {
-    get(`/photos/${params}`, {image_size: 4, comments: 1})
+    get(`/photos/${params}`, {image_size: 4, comments: 1, tags: 1})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotoDetails,
