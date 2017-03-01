@@ -3,6 +3,6 @@ import React from 'react';
 export default function Header({
 }) {
   return (
-    <h3>Photo Map App</h3>
+    <h1>Photo Map App</h1>
   );
 }
