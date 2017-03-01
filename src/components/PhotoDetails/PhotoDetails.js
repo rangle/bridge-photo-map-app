@@ -11,7 +11,7 @@ class PhotoDetails extends Component {
     this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
-    const { photo, comments } = this.props;
+    const { photo, comments, relatedList } = this.props;
     return (
       <div>
         <Header/>
@@ -36,12 +36,14 @@ PhotoDetails.propTypes = {
   comments: T.array,
   params: T.object,
   id: T.number,
-  getPhotoDetails: T.func,
+  getPhotoDetails: T.func.isRequired,
+  relatedList: T.array,
 };
 
 const mapStateToProps = state => ({
   photo: state.photos.photo,
   comments: state.photos.comments,
+  relatedList: state.photos.relatedList,
 });
 
 const mapDispatchToProps = {

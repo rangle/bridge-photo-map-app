@@ -2,12 +2,14 @@ import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 
 import { getRelatedPhotos } from '../../actions/index';
+import Images from '../Images/Images';
 
 class RelatedPhotoGallery extends Component {
   render() {
     return (
     <div>
-      <h5>Recommended For You</h5>
+      <h5 className="center-align">Recommended For You</h5>
+      <Images photos={this.props.photos}/>
     </div>
     );
   }
@@ -15,8 +17,9 @@ class RelatedPhotoGallery extends Component {
 
 RelatedPhotoGallery.propTypes = {
   tags: T.array,
-  relatedPhotos: T.func,
-  getRelatedPhotos: T.func,
+  relatedPhotos: T.func.isRequired,
+  getRelatedPhotos: T.func.isRequired,
+  photos: T.array,
 };
 
 const mapStateToProps = state => ({
