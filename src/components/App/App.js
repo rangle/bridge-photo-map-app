@@ -12,28 +12,26 @@ import {
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 import Header from '../Header/Header';
+import SearchForm from '../SearchForm';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.handleKeyword = this.handleKeyword.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
   componentDidMount() {
     this.props.getPhotos();
   }
 
   render() {
+    const { searchForm } = this.props;
+    const handleSearchSubmit = e => {
+      e.preventDefault();
+      return this.props.searchPhotos(searchForm.values.searchHashtag);
+    };
+
     return (
       <div>
         <Header/>
         <main>
-          <form className="container">
-            <input onChange={this.handleKeyword} type="text"/>
-            <button onClick={this.handleSearch} className="btn waves-effect waves-light" type="button">Search</button>
-            <h4>{this.props.status && `#${this.props.search}`}</h4>
-          </form>
+          <SearchForm onSubmit={ handleSearchSubmit } />
+          { searchForm && searchForm.values && <h4>{this.props.status && `#${searchForm.values.searchHashtag}`}</h4> }
           <PhotoGallery photos={this.props.photos} />
           <PhotoMap
             photos={this.props.photos}
@@ -47,13 +45,6 @@ class App extends Component {
         </main>
       </div>
     );
-  }
-
-  handleKeyword(e) {
-    this.props.handleInput(e.target.value);
-  }
-  handleSearch() {
-    this.props.searchPhotos(this.props.search);
   }
 }
 
@@ -71,6 +62,7 @@ App.propTypes = {
   status: T.bool,
   searchPhotos: T.func.isRequired,
   coords: T.object,
+  searchForm: T.object,
 };
 
 const mapStateToProps = state => ({
@@ -82,6 +74,7 @@ const mapStateToProps = state => ({
   status: state.photos.status,
   relatedPhotos: state.photos.relatedList,
   coords: state.photos.coords,
+  searchForm: state.form.search,
 });
 
 const mapDispatchToProps = {
