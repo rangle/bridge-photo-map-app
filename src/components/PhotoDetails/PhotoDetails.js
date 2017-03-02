@@ -11,11 +11,12 @@ class PhotoDetails extends Component {
     this.props.getPhotoDetails(this.props.params.id);
   }
   render() {
-    const { photo, comments, relatedList } = this.props;
+    const { photo, comments } = this.props;
     return (
       <div>
         <Header/>
         <div className="container">
+          <p><Link to="/">Back</Link></p>
           <h2>{photo.name}</h2>
           <img className="z-depth-4" src={photo.image_url}/>
           <h5>Comments</h5>
@@ -26,6 +27,12 @@ class PhotoDetails extends Component {
         </div>
       </div>
     );
+  }
+  componentShouldUpdate(nextProps, nextState) {
+    if (nextProps.params.id !== this.props.params.id) {
+      this.props.getPhotoDetails(nextProps.params.id);
+      console.log(nextState);
+    }
   }
 }
 
@@ -40,7 +47,6 @@ PhotoDetails.propTypes = {
 const mapStateToProps = state => ({
   photo: state.photos.photo,
   comments: state.photos.comments,
-  relatedList: state.photos.relatedList,
 });
 
 const mapDispatchToProps = {
