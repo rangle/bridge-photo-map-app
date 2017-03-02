@@ -83,9 +83,9 @@ export function searchPhotos(keyword) {
   };
 }
 
-export function getRelatedPhotos() {
+export function getRelatedPhotos(tag) {
   return dispatch => {
-    get('/photos/search', { geo: '43.6532,-79.3832,1km' })
+    get('/photos/search', { term: tag, image_size: 200 })
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getRelatedPhotos,
@@ -127,7 +127,7 @@ export function getCurrentLocation() {
 }
 
 export function getPhotoDetails(params) {
-  return dispatch => {
+  return (dispatch, getState) => {
     get(`/photos/${params}`, {image_size: 4, comments: 1, tags: 1})
     .then(response => {
       dispatch({
@@ -135,8 +135,13 @@ export function getPhotoDetails(params) {
         payload: {
           photo: response.photo,
           comments: response.comments,
+          tag: response.photo.tags[0],
         },
       });
+    })
+    .then(() => {
+      const tag = getState().photos.tag;
+      dispatch(getRelatedPhotos(tag));
     });
   };
 }

@@ -8,7 +8,6 @@ import {
   setActiveMarker,
   searchPhotos,
   handleInput,
-  getRelatedPhotos,
 } from '../../actions/index';
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
@@ -61,18 +60,16 @@ class App extends Component {
 App.propTypes = {
   getPhotos: T.func.isRequired,
   photos: T.array.isRequired,
-  setSelectedPhotoID: T.func,
+  setSelectedPhotoID: T.func.isRequired,
   selectedPhotoID: T.number,
-  showInfoWindow: T.func,
+  showInfoWindow: T.func.isRequired,
   showingInfoWindow: T.bool,
-  setActiveMarker: T.func,
+  setActiveMarker: T.func.isRequired,
   activeMarker: T.object,
-  handleInput: T.func,
+  handleInput: T.func.isRequired,
   search: T.string.isRequired,
   status: T.bool,
-  searchPhotos: T.func,
-  getRelatedPhotos: T.func,
-  relatedPhotos: T.array,
+  searchPhotos: T.func.isRequired,
   coords: T.object,
 };
 
@@ -94,7 +91,6 @@ const mapDispatchToProps = {
   setActiveMarker,
   handleInput,
   searchPhotos,
-  getRelatedPhotos,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
