@@ -35,12 +35,6 @@ class PhotoDetails extends Component {
       </div>
     );
   }
-  componentShouldUpdate(nextProps, nextState) {
-    if (nextProps.params.id !== this.props.params.id) {
-      this.props.getPhotoDetails(nextProps.params.id);
-      console.log(nextState);
-    }
-  }
 }
 
 PhotoDetails.propTypes = {
