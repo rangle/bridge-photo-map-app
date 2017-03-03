@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
 import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
+import createLogger from 'redux-logger';
 
 function configureStore(initialState) {
   const store = compose(
@@ -17,6 +18,7 @@ function configureStore(initialState) {
 function _getMiddleware() {
   let middleware = [
     routerMiddleware(browserHistory),
+    createLogger(),
     thunk,
   ];
 
