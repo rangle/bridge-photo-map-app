@@ -10,6 +10,13 @@ class PhotoDetails extends Component {
   componentDidMount() {
     this.props.getPhotoDetails(this.props.params.id);
   }
+
+  componentWillReceiveProps(propUpdate) {
+    if (this.props.params.id !== propUpdate.params.id) {
+      this.props.getPhotoDetails(propUpdate.params.id);
+    }
+  }
+
   render() {
     const { photo, comments } = this.props;
     return (
@@ -22,7 +29,7 @@ class PhotoDetails extends Component {
           <h5>Comments</h5>
           <span>{photo.votes_count} Votes</span>
           {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.body}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
-          <RelatedPhotoGallery tags={photo.tags}/>
+          <RelatedPhotoGallery tags={photo.tags} />
           <p><Link to="/">Back</Link></p>
         </div>
       </div>
