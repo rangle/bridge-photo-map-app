@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 
 import './Image.css';
 
-import './Image.css';
-
 export default function Image({
   photo,
   size,
