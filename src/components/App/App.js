@@ -12,7 +12,7 @@ import {
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 import Header from '../Header/Header';
-import SearchForm from '../SearchForm';
+import SearchForm from '../Forms/SearchForm';
 
 class App extends Component {
   componentDidMount() {

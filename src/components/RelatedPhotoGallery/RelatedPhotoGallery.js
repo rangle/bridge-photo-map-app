@@ -15,9 +15,6 @@ class RelatedPhotoGallery extends Component {
 }
 
 RelatedPhotoGallery.propTypes = {
-  tags: T.array,
-  getRelatedPhotos: T.func.isRequired,
-  photos: T.array,
   relatedList: T.array,
 };
 
