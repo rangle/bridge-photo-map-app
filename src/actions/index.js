@@ -27,6 +27,7 @@ export function getPhotos() {
   };
 }
 
+// Sets active photo on map marker click (Temporary?)
 export function setSelectedPhotoID(selectedPhotoID) {
   return {
     type: ACTION_TYPES.setSelectedPhotoID,
@@ -36,6 +37,7 @@ export function setSelectedPhotoID(selectedPhotoID) {
   };
 }
 
+// Toggles map infowindow display
 export function showInfoWindow(bool) {
   return {
     type: ACTION_TYPES.showInfoWindow,
@@ -45,25 +47,13 @@ export function showInfoWindow(bool) {
   };
 }
 
+// Sets active marker on map marker click (Temporary?)
 export function setActiveMarker(activeMarker) {
   return {
     type: ACTION_TYPES.setActiveMarker,
     payload: {
       activeMarker,
     },
-  };
-}
-
-// This updates the search state on input change so that we can access it when we call searchPhotos below.
-export function handleInput(keyword) {
-  return dispatch => {
-    dispatch({
-      type: ACTION_TYPES.handleInput,
-      payload: {
-        keyword: keyword,
-        status: false, // Prevents state keyword from showing on type after first search.
-      },
-    });
   };
 }
 

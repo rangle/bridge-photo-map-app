@@ -7,8 +7,9 @@ function SearchForm({
 }) {
   return (
     <form onSubmit={ onSubmit }>
-      <Field name="searchHashtag" component="input" type="text" placeholder="Search for stuff" />
-      <button className="btn waves-effect waves-light" type="submit">Submit</button>
+      <label htmlFor="searchKeyword">Search for keyword:</label>
+      <Field name="searchKeyword" component="input" type="text" placeholder="eggs" />
+      <button className="btn waves-effect waves-light" type="submit">Search</button>
     </form>
   );
 }
@@ -17,4 +18,4 @@ SearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default reduxForm({ form: 'search' })(SearchForm);
+export default reduxForm({ form: 'searchForm' })(SearchForm);

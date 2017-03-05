@@ -1,14 +1,13 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'react-redux';
-
 import {
-  getPhotos,
-  setSelectedPhotoID,
-  showInfoWindow,
-  setActiveMarker,
-  searchPhotos,
-  handleInput,
+  getPhotos as gp,
+  setSelectedPhotoID as sspid,
+  showInfoWindow as siw,
+  setActiveMarker as sam,
+  searchPhotos as sp,
 } from '../../actions/index';
+
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
 import PhotoMap from '../PhotoMap/PhotoMap';
 import Header from '../Header/Header';
@@ -16,14 +15,28 @@ import SearchForm from '../Forms/SearchForm';
 
 class App extends Component {
   componentDidMount() {
-    this.props.getPhotos();
+    const { getPhotos } = this.props;
+    getPhotos();
   }
 
   render() {
-    const { searchForm } = this.props;
+    const {
+      setSelectedPhotoID,
+      showInfoWindow,
+      setActiveMarker,
+      searchPhotos,
+      photos,
+      selectedPhotoID,
+      showingInfoWindow,
+      activeMarker,
+      status,
+      coords,
+      searchForm,
+    } = this.props;
+
     const handleSearchSubmit = e => {
       e.preventDefault();
-      return this.props.searchPhotos(searchForm.values.searchHashtag);
+      return searchPhotos(searchForm.values.searchKeyword);
     };
 
     return (
@@ -31,17 +44,17 @@ class App extends Component {
         <Header/>
         <main>
           <SearchForm onSubmit={ handleSearchSubmit } />
-          { searchForm && searchForm.values && <h4>{this.props.status && `#${searchForm.values.searchHashtag}`}</h4> }
-          <PhotoGallery photos={this.props.photos} />
+          { searchForm && searchForm.values && <h4>{status && `#${searchForm.values.searchKeyword}`}</h4> }
+          <PhotoGallery photos={photos} />
           <PhotoMap
-            photos={this.props.photos}
-            setSelectedPhotoID={this.props.setSelectedPhotoID}
-            selectedPhotoID={this.props.selectedPhotoID}
-            showInfoWindow={this.props.showInfoWindow}
-            showingInfoWindow={this.props.showingInfoWindow}
-            setActiveMarker={this.props.setActiveMarker}
-            activeMarker={this.props.activeMarker}
-            coords={this.props.coords} />
+            photos={photos}
+            setSelectedPhotoID={setSelectedPhotoID}
+            selectedPhotoID={selectedPhotoID}
+            showInfoWindow={showInfoWindow}
+            showingInfoWindow={showingInfoWindow}
+            setActiveMarker={setActiveMarker}
+            activeMarker={activeMarker}
+            coords={coords} />
         </main>
       </div>
     );
@@ -57,8 +70,6 @@ App.propTypes = {
   showingInfoWindow: T.bool,
   setActiveMarker: T.func.isRequired,
   activeMarker: T.object,
-  handleInput: T.func.isRequired,
-  search: T.string.isRequired,
   status: T.bool,
   searchPhotos: T.func.isRequired,
   coords: T.object,
@@ -70,20 +81,17 @@ const mapStateToProps = state => ({
   selectedPhotoID: state.photos.selectedPhotoID,
   showingInfoWindow: state.photos.showingInfoWindow,
   activeMarker: state.photos.activeMarker,
-  search: state.photos.search,
   status: state.photos.status,
-  relatedPhotos: state.photos.relatedList,
   coords: state.photos.coords,
-  searchForm: state.form.search,
+  searchForm: state.form.searchForm,
 });
 
 const mapDispatchToProps = {
-  getPhotos,
-  setSelectedPhotoID,
-  showInfoWindow,
-  setActiveMarker,
-  handleInput,
-  searchPhotos,
+  getPhotos: gp,
+  setSelectedPhotoID: sspid,
+  showInfoWindow: siw,
+  setActiveMarker: sam,
+  searchPhotos: sp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
