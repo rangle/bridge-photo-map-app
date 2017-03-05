@@ -16,7 +16,7 @@ import SearchForm from '../Forms/SearchForm';
 class App extends Component {
   componentDidMount() {
     const { getPhotos } = this.props;
-    getPhotos();
+    getPhotos({feature: 'popular', image_size: [1, 200], tags: 1});
   }
 
   render() {
