@@ -5,7 +5,6 @@ import {
   setSelectedPhotoID as sspid,
   showInfoWindow as siw,
   setActiveMarker as sam,
-  searchPhotos as sp,
 } from '../../actions/index';
 
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
@@ -16,27 +15,33 @@ import SearchForm from '../Forms/SearchForm';
 class App extends Component {
   componentDidMount() {
     const { getPhotos } = this.props;
-    getPhotos({feature: 'popular', image_size: [1, 200], tags: 1});
+    getPhotos({
+      feature: 'popular',
+      image_size: [1, 200],
+      tags: 1,
+    });
   }
 
   render() {
     const {
+      getPhotos,
       setSelectedPhotoID,
       showInfoWindow,
       setActiveMarker,
-      searchPhotos,
       photos,
       selectedPhotoID,
       showingInfoWindow,
       activeMarker,
-      status,
       coords,
       searchForm,
     } = this.props;
 
     const handleSearchSubmit = e => {
       e.preventDefault();
-      return searchPhotos(searchForm.values.searchKeyword);
+      return getPhotos({
+        term: searchForm.values.searchKeyword,
+        image_size: [1, 200],
+      }, '/search');
     };
 
     return (
@@ -44,7 +49,7 @@ class App extends Component {
         <Header/>
         <main>
           <SearchForm onSubmit={ handleSearchSubmit } />
-          { searchForm && searchForm.values && <h4>{status && `#${searchForm.values.searchKeyword}`}</h4> }
+          { searchForm && searchForm.values && <h4>{`#${searchForm.values.searchKeyword}`}</h4> }
           <PhotoGallery photos={photos} />
           <PhotoMap
             photos={photos}
@@ -70,8 +75,6 @@ App.propTypes = {
   showingInfoWindow: T.bool,
   setActiveMarker: T.func.isRequired,
   activeMarker: T.object,
-  status: T.bool,
-  searchPhotos: T.func.isRequired,
   coords: T.object,
   searchForm: T.object,
 };
@@ -81,7 +84,6 @@ const mapStateToProps = state => ({
   selectedPhotoID: state.photos.selectedPhotoID,
   showingInfoWindow: state.photos.showingInfoWindow,
   activeMarker: state.photos.activeMarker,
-  status: state.photos.status,
   coords: state.photos.coords,
   searchForm: state.form.searchForm,
 });
@@ -91,7 +93,6 @@ const mapDispatchToProps = {
   setSelectedPhotoID: sspid,
   showInfoWindow: siw,
   setActiveMarker: sam,
-  searchPhotos: sp,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -13,9 +13,9 @@ export const ACTION_TYPES = {
 };
 
 // This handles loading photos on mount. Temporary.
-export function getPhotos(params) {
+export function getPhotos(params, endpoint = '') {
   return dispatch => {
-    get('/photos', params)
+    get(`/photos${endpoint}`, params)
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -54,22 +54,6 @@ export function setActiveMarker(activeMarker) {
     payload: {
       activeMarker,
     },
-  };
-}
-
-// In photo-gallery.js, we pass the keyword stored in the state to the searchPhotos function.
-export function searchPhotos(keyword) {
-  return dispatch => {
-    get('photos/search', {term: keyword, image_size: [1, 200]})
-    .then(response => {
-      dispatch({
-        type: ACTION_TYPES.searchPhotos,
-        payload: {
-          search: response.photos,
-          status: true,
-        },
-      });
-    });
   };
 }
 
@@ -116,9 +100,9 @@ export function getCurrentLocation() {
   };
 }
 
-export function getPhotoDetails(params) {
+export function getPhotoDetails(id) {
   return (dispatch, getState) => {
-    get(`/photos/${params}`, {image_size: 4, comments: 1, tags: 1})
+    get(`/photos/${id}`, {image_size: 4, comments: 1, tags: 1})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotoDetails,
