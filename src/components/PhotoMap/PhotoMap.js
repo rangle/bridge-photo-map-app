@@ -50,11 +50,16 @@ class PhotoMap extends Component {
       showingInfoWindow,
       selectedPhotoID,
       zoom,
+      loaded,
     } = this.props;
+
+    if (!loaded) {
+      return <p>Loading...</p>;
+    }
 
     return (
       <Map
-        style={{width: '100%', height: '75%', display: 'block'}}
+        style={{width: '70%', height: '75%', display: 'block', margin: '0 auto'}}
         google={google}
         center={{...coords}}
         centerAroundCurrentLocation
@@ -93,6 +98,7 @@ PhotoMap.propTypes = {
   coords: T.object,
   zoom: T.number,
   center: T.object,
+  loaded: T.bool,
 };
 
 export default GoogleApiWrapper({
