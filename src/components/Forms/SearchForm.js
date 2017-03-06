@@ -6,7 +6,7 @@ function SearchForm({
   onSubmit,
 }) {
   return (
-    <div className="container">
+    <div>
       <form onSubmit={ onSubmit }>
         <div>
           <label htmlFor="searchKeyword">Search for keyword:</label>

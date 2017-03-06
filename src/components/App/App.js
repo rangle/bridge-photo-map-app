@@ -54,9 +54,9 @@ class App extends Component {
     return (
       <div>
         <Header/>
-        <main>
+        <main className="container">
+         { searchForm && searchForm.values && searchForm.values.searchKeyword && <h4>{`#${searchForm.values.searchKeyword}`}</h4> }
           <SearchForm onSubmit={ handleSearchSubmit } />
-          { searchForm && searchForm.values && <h4>{`#${searchForm.values.searchKeyword}`}</h4> }
           <PhotoGallery photos={photos} />
           <PhotoMap
             photos={photos}
