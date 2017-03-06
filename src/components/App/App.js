@@ -36,12 +36,19 @@ class App extends Component {
       searchForm,
     } = this.props;
 
+    const buildQueryParams = (imgSize = [1, 200]) => {
+      const term = (searchForm && searchForm.values && searchForm.values.searchKeyword) ? searchForm.values.searchKeyword : '';
+      const geo = (searchForm && searchForm.values && searchForm.values.within5km) ? `${coords.lat},${coords.lng},5km` : '';
+      return {
+        image_size: imgSize,
+        ...term && { term },
+        ...geo && { geo },
+      };
+    };
+
     const handleSearchSubmit = e => {
       e.preventDefault();
-      return getPhotos({
-        term: searchForm.values.searchKeyword,
-        image_size: [1, 200],
-      }, '/search');
+      return getPhotos(buildQueryParams(), '/search');
     };
 
     return (
@@ -59,7 +66,8 @@ class App extends Component {
             showingInfoWindow={showingInfoWindow}
             setActiveMarker={setActiveMarker}
             activeMarker={activeMarker}
-            coords={coords} />
+            coords={coords}
+            zoom={(searchForm && searchForm.values && searchForm.values.within5km) ? 12 : 5} />
         </main>
       </div>
     );
@@ -77,6 +85,7 @@ App.propTypes = {
   activeMarker: T.object,
   coords: T.object,
   searchForm: T.object,
+  zoom: T.number,
 };
 
 const mapStateToProps = state => ({

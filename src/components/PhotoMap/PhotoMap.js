@@ -49,15 +49,16 @@ class PhotoMap extends Component {
       activeMarker,
       showingInfoWindow,
       selectedPhotoID,
+      zoom,
     } = this.props;
 
     return (
       <Map
         style={{width: '80%', height: '75%', display: 'block', margin: '0 auto'}}
         google={google}
-        initialCenter={{...coords}}
+        center={{...coords}}
         centerAroundCurrentLocation
-        zoom={5}
+        zoom={zoom}
         onClick={this.onMapClicked}>
         { photos.map( (photo) => <Marker
           key={photo.id}
@@ -90,6 +91,8 @@ PhotoMap.propTypes = {
   setActiveMarker: T.func.isRequired,
   activeMarker: T.object,
   coords: T.object,
+  zoom: T.number,
+  center: T.object,
 };
 
 export default GoogleApiWrapper({
