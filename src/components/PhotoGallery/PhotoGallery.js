@@ -6,7 +6,7 @@ export default function PhotoGallery({
   photos,
 }) {
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: '2em'}}>
       <Images photos={photos}/>
     </div>
   );
