@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-
 import { Field, reduxForm } from 'redux-form';
 
 function SearchForm({

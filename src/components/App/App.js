@@ -50,7 +50,6 @@ class App extends Component {
       e.preventDefault();
       return getPhotos(buildQueryParams(), '/search');
     };
-
     return (
       <div>
         <Header/>
