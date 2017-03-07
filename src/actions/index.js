@@ -1,4 +1,5 @@
 import { get } from '../api/request';
+import axios from 'axios';
 
 export const ACTION_TYPES = {
   getPhotos: 'GET_PHOTOS',
@@ -10,6 +11,7 @@ export const ACTION_TYPES = {
   getPhotoDetails: 'PHOTO_DETAILS',
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
   getCurrentLocation: 'GET_CURRENT_LOCATION',
+  getComments: 'GET_COMMENTS',
 };
 
 // This handles loading photos on mount. Temporary.
@@ -108,7 +110,6 @@ export function getPhotoDetails(id) {
         type: ACTION_TYPES.getPhotoDetails,
         payload: {
           photo: response.photo,
-          comments: response.comments,
           tag: response.photo.tags[0],
         },
       });
@@ -116,6 +117,25 @@ export function getPhotoDetails(id) {
     .then(() => {
       const tag = getState().photos.tag;
       dispatch(getRelatedPhotos(tag));
+    });
+  };
+}
+
+export function getComments(photoId) {
+  return (dispatch) => {
+    console.log('getComments is running.');
+    axios.get(`https://500pxserver-zuuynfmrvy.now.sh/api/photos/${photoId}/comments`)
+    .then(response => {
+      console.log(response.data);
+      dispatch({
+        type: ACTION_TYPES.getComments,
+        payload: {
+          comments: response.data,
+        },
+      });
+    })
+    .catch(error => {
+      console.log(error);
     });
   };
 }
