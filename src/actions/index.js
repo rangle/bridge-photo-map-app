@@ -123,10 +123,8 @@ export function getPhotoDetails(id) {
 
 export function getComments(photoId) {
   return (dispatch) => {
-    console.log('getComments is running.');
     axios.get(`https://500pxserver-zuuynfmrvy.now.sh/api/photos/${photoId}/comments`)
     .then(response => {
-      console.log(response.data);
       dispatch({
         type: ACTION_TYPES.getComments,
         payload: {
