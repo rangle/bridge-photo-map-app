@@ -6,7 +6,6 @@ const INITIAL_STATE = {
   showingInfoWindow: false,
   activeMarker: {},
   search: '',
-  status: false,
   relatedList: [],
   coords: {
     lat: 43.6726438,
@@ -28,10 +27,6 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{showingInfoWindow: payload.showingInfoWindow}};
   case ACTION_TYPES.setActiveMarker:
     return {...state, ...{activeMarker: payload.activeMarker}};
-  case ACTION_TYPES.handleInput:
-    return {...state, ...{search: payload.keyword, status: payload.status}};
-  case ACTION_TYPES.searchPhotos:
-    return {...state, ...{list: payload.search, status: payload.status}};
   case ACTION_TYPES.getRelatedPhotos:
     return {...state, ...{relatedList: payload.photos}};
   case ACTION_TYPES.getCurrentLocation:

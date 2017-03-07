@@ -13,9 +13,9 @@ export const ACTION_TYPES = {
 };
 
 // This handles loading photos on mount. Temporary.
-export function getPhotos() {
+export function getPhotos(params, endpoint = '') {
   return dispatch => {
-    get('/photos', {feature: 'popular', image_size: [1, 200], tags: 1})
+    get(`/photos${endpoint}`, params)
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -27,6 +27,7 @@ export function getPhotos() {
   };
 }
 
+// Sets active photo on map marker click (Temporary?)
 export function setSelectedPhotoID(selectedPhotoID) {
   return {
     type: ACTION_TYPES.setSelectedPhotoID,
@@ -36,6 +37,7 @@ export function setSelectedPhotoID(selectedPhotoID) {
   };
 }
 
+// Toggles map infowindow display
 export function showInfoWindow(bool) {
   return {
     type: ACTION_TYPES.showInfoWindow,
@@ -45,41 +47,13 @@ export function showInfoWindow(bool) {
   };
 }
 
+// Sets active marker on map marker click (Temporary?)
 export function setActiveMarker(activeMarker) {
   return {
     type: ACTION_TYPES.setActiveMarker,
     payload: {
       activeMarker,
     },
-  };
-}
-
-// This updates the search state on input change so that we can access it when we call searchPhotos below.
-export function handleInput(keyword) {
-  return dispatch => {
-    dispatch({
-      type: ACTION_TYPES.handleInput,
-      payload: {
-        keyword: keyword,
-        status: false, // Prevents state keyword from showing on type after first search.
-      },
-    });
-  };
-}
-
-// In photo-gallery.js, we pass the keyword stored in the state to the searchPhotos function.
-export function searchPhotos(keyword) {
-  return dispatch => {
-    get('photos/search', {term: keyword, image_size: [1, 200]})
-    .then(response => {
-      dispatch({
-        type: ACTION_TYPES.searchPhotos,
-        payload: {
-          search: response.photos,
-          status: true,
-        },
-      });
-    });
   };
 }
 
@@ -126,9 +100,9 @@ export function getCurrentLocation() {
   };
 }
 
-export function getPhotoDetails(params) {
+export function getPhotoDetails(id) {
   return (dispatch, getState) => {
-    get(`/photos/${params}`, {image_size: 4, comments: 1, tags: 1})
+    get(`/photos/${id}`, {image_size: 4, comments: 1, tags: 1})
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotoDetails,
