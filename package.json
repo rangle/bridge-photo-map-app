@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.3.3",
+    "axios": "^0.15.3",
     "babel": "^6.5.2",
     "babel-cli": "^6.8.0",
     "babel-core": "^6.4.0",
