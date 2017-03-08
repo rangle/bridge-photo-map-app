@@ -12,6 +12,10 @@ function SearchForm({
           <Field name="searchKeyword" component="input" type="text" placeholder="eggs" />
         </div>
         <div>
+          <label htmlFor="searchLocation">Search for location:</label>
+          <Field name="searchLocation" component="input" type="text" placeholder="Toronto" />
+        </div>
+        <div>
           <Field name="within5km" id="within5km" component="input" type="checkbox" />
           <label htmlFor="within5km">within 5 km</label>
         </div>
