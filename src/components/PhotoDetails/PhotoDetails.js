@@ -43,15 +43,18 @@ class PhotoDetails extends Component {
           <p><Link to="/">Back</Link></p>
           <h2>{photo.name}</h2>
           <img className="z-depth-4" src={photo.image_url}/>
-          <div style={{width: '55%', marginRight: '5%', display: 'inline-block'}}>
-            <h5>Comments</h5>
-            <span>{photo.votes_count} Votes</span>
-            <CommentForm onSubmit={ handlePostComment } />
-            {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.text}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
-          </div>
-          <div style={{width: '25%', display: 'inline-block', margin: '0'}}>
-            <h5>Photo Location</h5>
-            <PhotoDetailsMap photo={photo} />
+          <div
+            style={{position: 'relative'}}>
+            <div style={{width: '55%', marginRight: '10%', display: 'inline-block'}}>
+              <h5>Comments</h5>
+              <span>{photo.votes_count} Votes</span>
+              <CommentForm onSubmit={ handlePostComment } />
+              {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.text}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
+            </div>
+            <div style={{width: '35%', display: 'inline-block', margin: '0', position: 'absolute'}}>
+              <h5>Photo Location</h5>
+              <PhotoDetailsMap photo={photo} />
+            </div>
           </div>
           <RelatedPhotoGallery tags={photo.tags} />
           <p><Link to="/">Back</Link></p>
