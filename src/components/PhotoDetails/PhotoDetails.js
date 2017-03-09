@@ -7,6 +7,7 @@ import { getPhotoDetails, getComments } from '../../actions/index';
 import RelatedPhotoGallery from '../RelatedPhotoGallery/RelatedPhotoGallery';
 import Header from '../Header/Header';
 import CommentForm from '../Forms/CommentForm';
+import PhotoDetailsMap from '../PhotoDetailsMap/PhotoDetailsMap';
 
 class PhotoDetails extends Component {
   componentDidMount() {
@@ -42,10 +43,19 @@ class PhotoDetails extends Component {
           <p><Link to="/">Back</Link></p>
           <h2>{photo.name}</h2>
           <img className="z-depth-4" src={photo.image_url}/>
-          <h5>Comments</h5>
-          <span>{photo.votes_count} Votes</span>
-          <CommentForm onSubmit={ handlePostComment } />
-          {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.text}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
+          <div
+            style={{position: 'relative'}}>
+            <div style={{width: '55%', marginRight: '10%', display: 'inline-block'}}>
+              <h5>Comments</h5>
+              <span>{photo.votes_count} Votes</span>
+              <CommentForm onSubmit={ handlePostComment } />
+              {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.text}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
+            </div>
+            <div style={{width: '35%', display: 'inline-block', margin: '0', position: 'absolute'}}>
+              <h5>Photo Location</h5>
+              <PhotoDetailsMap photo={photo} />
+            </div>
+          </div>
           <RelatedPhotoGallery tags={photo.tags} />
           <p><Link to="/">Back</Link></p>
         </div>
