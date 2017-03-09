@@ -11,15 +11,14 @@ export const ACTION_TYPES = {
   handleInput: 'HANDLE_INPUT',
   getPhotoDetails: 'PHOTO_DETAILS',
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
-  getCurrentLocation: 'GET_CURRENT_LOCATION',
+  setLocation: 'SET_LOCATION',
   getComments: 'GET_COMMENTS',
-  searchGeocodedLocation: 'SEARCH_GEOCODED_LOCATION',
 };
 
-// This handles loading photos on mount. Temporary.
 export function getPhotos(params, endpoint = '') {
+  const url = endpoint ? `/photos/${endpoint}` : '/photos';
   return dispatch => {
-    get(`/photos${endpoint}`, params)
+    get(url, params)
     .then(response => {
       dispatch({
         type: ACTION_TYPES.getPhotos,
@@ -41,7 +40,6 @@ export function setSelectedPhotoID(selectedPhotoID) {
   };
 }
 
-// Toggles map infowindow display
 export function showInfoWindow(bool) {
   return {
     type: ACTION_TYPES.showInfoWindow,
@@ -81,7 +79,7 @@ export function getCurrentLocation() {
       navigator.geolocation.getCurrentPosition( geoposition => {
         const {latitude, longitude} = geoposition.coords;
         dispatch({
-          type: ACTION_TYPES.getCurrentLocation,
+          type: ACTION_TYPES.setLocation,
           payload: {
             coords: {
               lat: latitude,
@@ -92,7 +90,7 @@ export function getCurrentLocation() {
       });
     } else {
       dispatch({
-        type: ACTION_TYPES.getCurrentLocation,
+        type: ACTION_TYPES.setLocation,
         payload: {
           coords: {
             lat: 43.6726438,
@@ -140,26 +138,28 @@ export function getComments(photoId) {
   };
 }
 
-export function searchGeocodedLocation(location) {
+export function searchGeocodedLocation(location, params, endpoint) {
   return (dispatch, getState) => {
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_GEOCODING_API_KEY}`)
     .then( response => {
+      const { lat, lng } = response.data.results[0].geometry.location;
       response.data.status && dispatch({
-        type: ACTION_TYPES.searchGeocodedLocation,
+        type: ACTION_TYPES.setLocation,
         payload: {
-          geocodedLocation: response.data.results[0],
+          coords: {
+            lat,
+            lng,
+          },
         },
       });
     })
     .then( () => {
-      const searchedLocation =  getState().photos.geocodedLocation;
-      const { lat, lng } = searchedLocation.geometry.location;
-      const params = {
-        term: 'candy',
-        image_size: [1, 200],
-        geo: `${lat},${lng},5km`,
+      const { lat, lng }  =  getState().photos.coords;
+      const updateParamsLoc = {
+        ...params,
+        ...{ geo: `${lat},${lng},5km` },
       };
-      dispatch(getPhotos(params, '/search'));
+      dispatch(getPhotos(updateParamsLoc, endpoint));
     });
   };
 }
