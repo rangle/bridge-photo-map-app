@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   photo: {},
   comments: [],
   tag: '',
+  geocodedLocation: {},
 };
 
 // Reducer
@@ -35,6 +36,8 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{photo: payload.photo, tag: payload.tag}};
   case ACTION_TYPES.getComments:
     return {...state, ...{comments: payload.comments}};
+  case ACTION_TYPES.searchGeocodedLocation:
+    return {...state, ...{geocodedLocation: payload.geocodedLocation}};
   default:
     return state;
   }

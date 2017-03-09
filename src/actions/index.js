@@ -1,5 +1,6 @@
 import { get } from '../api/request';
 import axios from 'axios';
+import { GOOGLE_GEOCODING_API_KEY } from '../config/api';
 
 export const ACTION_TYPES = {
   getPhotos: 'GET_PHOTOS',
@@ -12,6 +13,7 @@ export const ACTION_TYPES = {
   getRelatedPhotos: 'GET_RELATED_PHOTOS',
   getCurrentLocation: 'GET_CURRENT_LOCATION',
   getComments: 'GET_COMMENTS',
+  searchGeocodedLocation: 'SEARCH_GEOCODED_LOCATION',
 };
 
 // This handles loading photos on mount. Temporary.
@@ -122,7 +124,7 @@ export function getPhotoDetails(id) {
 }
 
 export function getComments(photoId) {
-  return (dispatch) => {
+  return dispatch => {
     axios.get(`https://500pxserver-zuuynfmrvy.now.sh/api/photos/${photoId}/comments`)
     .then(response => {
       dispatch({
@@ -134,6 +136,30 @@ export function getComments(photoId) {
     })
     .catch(error => {
       console.log(error);
+    });
+  };
+}
+
+export function searchGeocodedLocation(location) {
+  return (dispatch, getState) => {
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_GEOCODING_API_KEY}`)
+    .then( response => {
+      response.data.status && dispatch({
+        type: ACTION_TYPES.searchGeocodedLocation,
+        payload: {
+          geocodedLocation: response.data.results[0],
+        },
+      });
+    })
+    .then( () => {
+      const searchedLocation =  getState().photos.geocodedLocation;
+      const { lat, lng } = searchedLocation.geometry.location;
+      const params = {
+        term: 'candy',
+        image_size: [1, 200],
+        geo: `${lat},${lng},5km`,
+      };
+      dispatch(getPhotos(params, '/search'));
     });
   };
 }
