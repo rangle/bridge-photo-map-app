@@ -166,6 +166,9 @@ export function searchGeocodedLocation(location, params, endpoint) {
         ...(lat && lng) && { geo: `${lat},${lng},${radius}` },
       };
       dispatch(getPhotos(updatedParamsLoc, endpoint));
+    })
+    .catch(error => {
+      console.log(error);
     });
   };
 }
