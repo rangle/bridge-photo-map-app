@@ -38,7 +38,6 @@ class App extends Component {
       activeMarker,
       coords,
       searchForm,
-      searchGeocodedLocation,
     } = this.props;
 
     const buildQueryParams = (imgSize = [1, 200]) => {
