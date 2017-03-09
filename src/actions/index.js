@@ -139,27 +139,32 @@ export function getComments(photoId) {
 }
 
 export function searchGeocodedLocation(location, params, endpoint) {
-  return (dispatch, getState) => {
+  return dispatch => {
+    let lat;
+    let lng;
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${GOOGLE_GEOCODING_API_KEY}`)
     .then( response => {
-      const { lat, lng } = response.data.results[0].geometry.location;
-      response.data.status && dispatch({
-        type: ACTION_TYPES.setLocation,
-        payload: {
-          coords: {
-            lat,
-            lng,
+      if (response.data.status === 'OK' && response.data.results[0].geometry && response.data.results[0].geometry.location) {
+        const loc = response.data.results[0].geometry.location;
+        lat = typeof loc.lat !== 'undefined' ? loc.lat : null;
+        lng = typeof loc.lng !== 'undefined' ? loc.lng : null;
+        dispatch({
+          type: ACTION_TYPES.setLocation,
+          payload: {
+            coords: {
+              lat,
+              lng,
+            },
           },
-        },
-      });
+        });
+      }
     })
     .then( () => {
-      const { lat, lng }  =  getState().photos.coords;
-      const updateParamsLoc = {
+      const updatedParamsLoc = {
         ...params,
-        ...{ geo: `${lat},${lng},5km` },
+        ...(lat && lng) && { geo: `${lat},${lng},5km` },
       };
-      dispatch(getPhotos(updateParamsLoc, endpoint));
+      dispatch(getPhotos(updatedParamsLoc, endpoint));
     });
   };
 }
