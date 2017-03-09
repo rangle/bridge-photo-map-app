@@ -5,7 +5,6 @@ import {
   setSelectedPhotoID as sspid,
   showInfoWindow as siw,
   setActiveMarker as sam,
-  searchGeocodedLocation as sgl,
 } from '../../actions/index';
 
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
@@ -93,7 +92,6 @@ App.propTypes = {
   coords: T.object,
   searchForm: T.object,
   zoom: T.number,
-  searchGeocodedLocation: T.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -110,7 +108,6 @@ const mapDispatchToProps = {
   setSelectedPhotoID: sspid,
   showInfoWindow: siw,
   setActiveMarker: sam,
-  searchGeocodedLocation: sgl,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
