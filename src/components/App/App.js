@@ -14,12 +14,16 @@ import SearchForm from '../Forms/SearchForm';
 
 class App extends Component {
   componentDidMount() {
-    const { getPhotos } = this.props;
-    getPhotos({
+    const {
+      getPhotos,
+    } = this.props;
+
+    const params = {
       feature: 'popular',
       image_size: [1, 200],
       tags: 1,
-    });
+    };
+    getPhotos(params);
   }
 
   render() {
@@ -37,8 +41,8 @@ class App extends Component {
     } = this.props;
 
     const buildQueryParams = (imgSize = [1, 200]) => {
-      const term = (searchForm && searchForm.values && searchForm.values.searchKeyword) ? searchForm.values.searchKeyword : '';
-      const geo = (searchForm && searchForm.values && searchForm.values.within5km) ? `${coords.lat},${coords.lng},5km` : '';
+      const term = (searchForm.values && searchForm.values.searchKeyword) ? searchForm.values.searchKeyword : null;
+      const geo = (searchForm.values && searchForm.values.within5km) ? `${coords.lat},${coords.lng},5km` : null;
       return {
         image_size: imgSize,
         ...term && { term },
@@ -48,8 +52,10 @@ class App extends Component {
 
     const handleSearchSubmit = e => {
       e.preventDefault();
-      return getPhotos(buildQueryParams(), '/search');
+      const location = (searchForm.values && searchForm.values.searchLocation) ? searchForm.values.searchLocation : null;
+      location ? searchGeocodedLocation(location, buildQueryParams(), 'search') : getPhotos(buildQueryParams(), 'search');
     };
+
     return (
       <div>
         <Header/>
