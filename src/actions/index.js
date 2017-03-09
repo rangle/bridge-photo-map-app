@@ -160,9 +160,10 @@ export function searchGeocodedLocation(location, params, endpoint) {
       }
     })
     .then( () => {
+      const radius = params.geo ? params.geo.split(',')[2] : '100km';
       const updatedParamsLoc = {
         ...params,
-        ...(lat && lng) && { geo: `${lat},${lng},5km` },
+        ...(lat && lng) && { geo: `${lat},${lng},${radius}` },
       };
       dispatch(getPhotos(updatedParamsLoc, endpoint));
     });
