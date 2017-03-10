@@ -29,7 +29,7 @@ export const photos = (state = INITIAL_STATE, {type, payload}) => {
     return {...state, ...{activeMarker: payload.activeMarker}};
   case ACTION_TYPES.getRelatedPhotos:
     return {...state, ...{relatedList: payload.photos}};
-  case ACTION_TYPES.getCurrentLocation:
+  case ACTION_TYPES.setLocation:
     return {...state, ...{coords: payload.coords}};
   case ACTION_TYPES.getPhotoDetails:
     return {...state, ...{photo: payload.photo, tag: payload.tag}};

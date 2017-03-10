@@ -5,6 +5,7 @@ import {
   setSelectedPhotoID as sspid,
   showInfoWindow as siw,
   setActiveMarker as sam,
+  searchGeocodedLocation as sgl,
 } from '../../actions/index';
 
 import PhotoGallery from '../PhotoGallery/PhotoGallery';
@@ -14,12 +15,16 @@ import SearchForm from '../Forms/SearchForm';
 
 class App extends Component {
   componentDidMount() {
-    const { getPhotos } = this.props;
-    getPhotos({
+    const {
+      getPhotos,
+    } = this.props;
+
+    const params = {
       feature: 'popular',
       image_size: [1, 200],
       tags: 1,
-    });
+    };
+    getPhotos(params);
   }
 
   render() {
@@ -34,11 +39,12 @@ class App extends Component {
       activeMarker,
       coords,
       searchForm,
+      searchGeocodedLocation,
     } = this.props;
 
     const buildQueryParams = (imgSize = [1, 200]) => {
-      const term = (searchForm && searchForm.values && searchForm.values.searchKeyword) ? searchForm.values.searchKeyword : '';
-      const geo = (searchForm && searchForm.values && searchForm.values.within5km) ? `${coords.lat},${coords.lng},5km` : '';
+      const term = (searchForm.values && searchForm.values.searchKeyword) ? searchForm.values.searchKeyword : null;
+      const geo = (searchForm.values && searchForm.values.within5km) ? `${coords.lat},${coords.lng},5km` : null;
       return {
         image_size: imgSize,
         ...term && { term },
@@ -48,8 +54,10 @@ class App extends Component {
 
     const handleSearchSubmit = e => {
       e.preventDefault();
-      return getPhotos(buildQueryParams(), '/search');
+      const location = (searchForm.values && searchForm.values.searchLocation) ? searchForm.values.searchLocation : null;
+      location ? searchGeocodedLocation(location, buildQueryParams(), 'search') : getPhotos(buildQueryParams(), 'search');
     };
+
     return (
       <div>
         <Header/>
@@ -85,6 +93,7 @@ App.propTypes = {
   coords: T.object,
   searchForm: T.object,
   zoom: T.number,
+  searchGeocodedLocation: T.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -101,6 +110,7 @@ const mapDispatchToProps = {
   setSelectedPhotoID: sspid,
   showInfoWindow: siw,
   setActiveMarker: sam,
+  searchGeocodedLocation: sgl,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
