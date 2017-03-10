@@ -20,10 +20,11 @@ export function getPhotos(params, endpoint = '') {
   return dispatch => {
     get(url, params)
     .then(response => {
+      const filteredPhotos = response.photos.filter( photo => photo.nswf !== true ).filter( photo => typeof photo.latitude !== 'undefined' && typeof photo.longitude !== 'undefined' );
       dispatch({
         type: ACTION_TYPES.getPhotos,
         payload: {
-          photos: response.photos,
+          photos: filteredPhotos,
         },
       });
     });
