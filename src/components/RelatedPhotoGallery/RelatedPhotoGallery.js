@@ -7,7 +7,7 @@ class RelatedPhotoGallery extends Component {
   render() {
     return (
       <div>
-        <h5 className="center-align">Recommended For You</h5>
+        <h5 className="center-align" style={{ color: '#666', marginBottom: '20px' }}>Recommended For You</h5>
         <Images photos={this.props.relatedList} />
       </div>
     );
