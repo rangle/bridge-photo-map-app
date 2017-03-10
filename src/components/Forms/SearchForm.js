@@ -5,7 +5,7 @@ function SearchForm({
   onSubmit,
 }) {
   return (
-    <div>
+    <div style={{ marginBottom: '40px' }}>
       <form onSubmit={ onSubmit }>
         <div>
           <label htmlFor="searchKeyword">Search for keyword:</label>
@@ -17,7 +17,7 @@ function SearchForm({
         </div>
         <div>
           <Field name="within5km" id="within5km" component="input" type="checkbox" />
-          <label htmlFor="within5km">within 5 km</label>
+          <label htmlFor="within5km" style={{ marginBottom: '10px' }}>within 5 km</label>
         </div>
         <button className="btn waves-effect waves-light" type="submit">Search</button>
       </form>

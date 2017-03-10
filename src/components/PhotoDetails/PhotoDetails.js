@@ -43,15 +43,25 @@ class PhotoDetails extends Component {
           <p><Link to="/">Back</Link></p>
           <h2>{photo.name}</h2>
           <img className="z-depth-4" src={photo.image_url}/>
-          <div style={{position: 'relative', 'marginBottom': '40px'}}>
-            <div style={{width: '55%', marginRight: '10%', display: 'inline-block'}}>
-              <h5>Comments</h5>
-              <span>{photo.votes_count} Votes</span>
+          <div style={{ position: 'relative', marginBottom: '40px' }}>
+            <div style={{ width: '55%', marginRight: '10%', display: 'inline-block' }}>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <img
+                  src={require('../../assets/comment-icon.svg')}
+                  style={{ height: '30px', margin: '0', marginRight: '10px' }} />
+                <h5 style={{ display: 'inline-block', color: '#666' }}>Comments</h5>
+              </div>
+              <span style={{ display: 'block' }}>{photo.votes_count} Votes</span>
               <CommentForm onSubmit={ handlePostComment } />
               {comments.length !== 0 ? comments.map((comment, index) => <p key={index}>{comment.text}</p>) : <p>No comments have been left for this photo. Be the first!</p>}
             </div>
-            <div style={{width: '35%', display: 'inline-block', margin: '0', position: 'absolute'}}>
-              <h5>Photo Location</h5>
+            <div style={{ width: '35%', display: 'inline-block', margin: '0', position: 'absolute' }}>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <img
+                  src={require('../../assets/marker-icon.svg')}
+                  style={{ height: '30px', margin: '0', marginRight: '10px' }} />
+                <h5 style={{ display: 'inline-block', color: '#666' }}>Photo Location</h5>
+              </div>
               <PhotoDetailsMap photo={photo} />
             </div>
           </div>
