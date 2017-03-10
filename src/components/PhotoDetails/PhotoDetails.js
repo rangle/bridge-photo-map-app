@@ -43,7 +43,7 @@ class PhotoDetails extends Component {
           <p><Link to="/">Back</Link></p>
           <h2>{photo.name}</h2>
           <img className="z-depth-4" src={photo.image_url}/>
-          <div style={{position: 'relative'}}>
+          <div style={{position: 'relative', 'marginBottom': '40px'}}>
             <div style={{width: '55%', marginRight: '10%', display: 'inline-block'}}>
               <h5>Comments</h5>
               <span>{photo.votes_count} Votes</span>

@@ -21,15 +21,7 @@ class PhotoDetailsMap extends Component {
 
     return (
       <Map
-<<<<<<< HEAD
-<<<<<<< HEAD
         style={{width: '325px', height: '250px'}}
-=======
-        style={{width: '200px', height: '200px'}}
->>>>>>> Added map to PhotoDetails page
-=======
-        style={{width: '325px', height: '250px'}}
->>>>>>> finished styling map component on photo details page
         google={google}
         zoom={15}
         center={{lat: photo.latitude, lng: photo.longitude}} >
