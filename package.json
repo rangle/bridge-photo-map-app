@@ -82,7 +82,7 @@
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.9.1",
     "postcss-modules-local-by-default": "^1.1.1",
-    "react": "15.3.0",
+    "react": "16.5.0",
     "react-addons-test-utils": "15.3.0",
     "react-dom": "15.3.0",
     "react-redux": "^4.4.2",
